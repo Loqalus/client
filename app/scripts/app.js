@@ -15,9 +15,12 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ngMap'
   ])
   .config(function ($routeProvider) {
+
+
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
