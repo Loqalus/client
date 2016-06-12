@@ -32,6 +32,25 @@ angular
         controller: 'AboutCtrl',
         controllerAs: 'about'
       })
+    .when('/events', {
+      templateUrl: 'views/events.html',
+      controller: 'eventMasterlist',
+      controllerAs: 'events'
+    })
+    .when('/conversations', {
+      templateUrl: 'views/conversations.html',
+      controller: 'conversationMasterlist',
+      controllerAs: 'conversations'
+    })
+    .when('/campaigns', {
+      templateUrl: 'views/campaigns.html',
+      controller: 'campaignMasterlist.html',
+      controllerAs: 'campaigns'
+    })
+
+      // Add a .when action for events, eventMasterlist.html
+      // eventMasterlistCtrl
+
       .otherwise({
         redirectTo: '/'
       });
