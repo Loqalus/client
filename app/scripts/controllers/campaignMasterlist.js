@@ -13,8 +13,9 @@
 // 		$scope.allCampaigns = [];
 
 //   	var setupCampaigns = function(){
-//   		$http.get("http://loqalus.herokuapp.com/api/conversations.json").then(function(response){ 
-// 				$scope.allConversations = response.data.message;
+//      var url = "localhost:8000/api/campaigns"
+//   		$http.get(url).then(function(response){ 
+// 				$scope.allConversations = response.data.campaigns;
 // 				console.log(response.data)
 //   		});
 //   	};

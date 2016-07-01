@@ -8,9 +8,11 @@
  * Controller of the loqalusClientApp
  */
 angular.module('loqalusClientApp')
-  .controller('MainCtrl',  function ($scope, NgMap, geolocationSvc) {
+  .controller('MainCtrl',  ['$scope', 'NgMap', 'geolocationSvc' , 'mapService', function ($scope, NgMap, geolocationSvc, mapService) {
   	var main = this;
   	main.zoom = 8;
+    var pins = [];
+    var dist = 1;
 
   	geolocationSvc.getCurrentPosition().then(
   	function(position){
@@ -20,11 +22,10 @@ angular.module('loqalusClientApp')
 
   	function initMap(position){
 	  	NgMap.getMap().then(function(map) {
-	    console.log(position);
 	    main.lat = position.coords.latitude;
 	    main.lng = position.coords.longitude;
-	    console.log(map);
-	    console.log('shapes', map.shapes);
+      pins = mapService.getPins(position.coords.latitude, position.coords.longitude, dist);
+      console.log(pins);
 	  });
   }
 
@@ -34,4 +35,4 @@ angular.module('loqalusClientApp')
       'AngularJS',
       'Karma'
     ];
-  });
+  }]);

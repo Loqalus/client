@@ -8,13 +8,14 @@
  * Controller of the loqalusClientApp
  */
 angular.module('loqalusClientApp')
-  .controller('eventMasterlist', function ['$scope', '$window', '$http', function($scope, $window, $http){
+  .controller('eventMasterlist', ['$scope', '$window', '$http', function($scope, $window, $http){
 
   	$scope.allEvents = [];
 
   	var setupEvents = function(){
-  		$http.get("http://loqalus.herokuapp.com/api/events").then(function(response){ 
-				$scope.allEvents = response.data;
+      var url = "localhost:8000/api/events"
+  		$http.get(url).then(function(response){ 
+				$scope.allEvents = response.data.events;
 				console.log(response.data);
   		});
   	};
@@ -22,9 +23,4 @@ angular.module('loqalusClientApp')
 		setupEvents();
 
 
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
   }]);

@@ -13,18 +13,12 @@ angular.module('loqalusClientApp')
 		$scope.allConversations = [];
 
   	var setupConversations = function(){
-  		$http.get("http://loqalus.herokuapp.com/api/conversations.json").then(function(response){ 
-				$scope.allConversations = response.data.message;
+      var url = "localhost:8000/api/conversations"
+  		$http.get(url).then(function(response){ 
+				$scope.allConversations = response.data.conversations;
 				console.log(response.data)
   		});
   	};
 
   	setupConversations();
-
-
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
   }]);
