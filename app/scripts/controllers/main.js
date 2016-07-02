@@ -24,15 +24,13 @@ angular.module('loqalusClientApp')
 	  	NgMap.getMap().then(function(map) {
 	    main.lat = position.coords.latitude;
 	    main.lng = position.coords.longitude;
-      pins = mapService.getPins(position.coords.latitude, position.coords.longitude, dist);
+      var dist = 1;
+      mapService.getPins(position.coords.latitude, position.coords.longitude, dist).then(function success(response){
+        pins = response.data.pins;
+      }).then(function error(){
+        console.log("Some error occured while getting pins.")
+      });
       console.log(pins);
 	  });
   }
-
-
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
   }]);

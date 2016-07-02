@@ -13,7 +13,7 @@ angular.module('loqalusClientApp')
 		$scope.allConversations = [];
 
   	var setupConversations = function(){
-      var url = "localhost:8000/api/conversations"
+      var url = "http://localhost:8000/api/conversations"
   		$http.get(url).then(function(response){ 
 				$scope.allConversations = response.data.conversations;
 				console.log(response.data)

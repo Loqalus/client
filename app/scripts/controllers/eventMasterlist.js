@@ -13,7 +13,7 @@ angular.module('loqalusClientApp')
   	$scope.allEvents = [];
 
   	var setupEvents = function(){
-      var url = "localhost:8000/api/events"
+      var url = "http://localhost:8000/api/events"
   		$http.get(url).then(function(response){ 
 				$scope.allEvents = response.data.events;
 				console.log(response.data);

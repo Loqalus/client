@@ -13,7 +13,7 @@
 // 		$scope.allCampaigns = [];
 
 //   	var setupCampaigns = function(){
-//      var url = "localhost:8000/api/campaigns"
+//      var url = "http://localhost:8000/api/campaigns"
 //   		$http.get(url).then(function(response){ 
 // 				$scope.allConversations = response.data.campaigns;
 // 				console.log(response.data)
