@@ -38,15 +38,30 @@ angular
       controller: 'eventMasterlist',
       controllerAs: 'events'
     })
+    .when('/conversation', {
+      templateUrl: 'views/conversation.html',
+      controller: 'conversationMasterlist',
+      controllerAs: 'conversations'
+    })
     .when('/conversations', {
       templateUrl: 'views/conversations.html',
-      controller: 'conversationMasterlist',
+      controller: 'conversation',
       controllerAs: 'conversations'
     })
     .when('/campaigns', {
       templateUrl: 'views/campaigns.html',
-      controller: 'campaignMasterlist.html',
+      controller: 'campaignMasterlist',
       controllerAs: 'campaigns'
+    })
+    .when('/profile', {
+      templateUrl: 'views/profile.html',
+      controller: 'profile',
+      controllerAs: 'profiles'
+    })
+    .when('/campaign-skeleton', {
+      templateUrl: 'views/campaigns.html',
+      controller: 'campaign',
+      controllerAs: 'campaign'
     })
 
       // Add a .when action for events, eventMasterlist.html
