@@ -1,6 +1,13 @@
-angular.module('loqalusClientApp').factory('geolocationSvc', ['$q', '$window', function ($q, $window) {
+'use strict';
 
-    'use strict';
+/**
+ * @ngdoc function
+ * @name loqalusClientApp.factory:geolocationSvc
+ * @description
+ * # geolocationSvc
+ * Location service
+ */
+angular.module('loqalusClientApp').factory('geolocationSvc', ['$q', '$window', function ($q, $window) {
 
     function getCurrentPosition() {
         var deferred = $q.defer();

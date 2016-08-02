@@ -1,6 +1,13 @@
-angular.module('loqalusClientApp').factory('mapService', ['$http',function ($http) {
+'use strict';
 
-    'use strict';
+/**
+ * @ngdoc function
+ * @name loqalusClientApp.factory:mapService
+ * @description
+ * # mapService
+ * Map service
+ */
+angular.module('loqalusClientApp').factory('mapService', ['$http',function ($http) {
 
     function getPins(lat, lng, dist) {
         var baseUrl = "http://localhost:8000/api/pins";
