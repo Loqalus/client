@@ -38,14 +38,9 @@ angular
       controller: 'eventMasterlist',
       controllerAs: 'events'
     })
-    .when('/conversation', {
-      templateUrl: 'views/conversation.html',
-      controller: 'conversationMasterlist',
-      controllerAs: 'conversations'
-    })
     .when('/conversations', {
       templateUrl: 'views/conversations.html',
-      controller: 'conversation',
+      controller: 'conversationMasterlist',
       controllerAs: 'conversations'
     })
     .when('/campaigns', {
@@ -58,15 +53,21 @@ angular
       controller: 'profile',
       controllerAs: 'profiles'
     })
-    .when('/campaign-skeleton', {
-      templateUrl: 'views/campaigns.html',
+    .when('/campaign/:id', {
+      templateUrl: 'views/campaign.html',
       controller: 'campaign',
       controllerAs: 'campaign'
     })
-
-      // Add a .when action for events, eventMasterlist.html
-      // eventMasterlistCtrl
-
+    .when('/conversation/:id', {
+      templateUrl: 'views/conversation.html',
+      controller: 'conversationCtrl',
+      controllerAs: 'conversationCtrl'
+    })
+    .when('/event/:id', {
+      templateUrl: 'views/event.html',
+      controller: 'eventCtrl',
+      controllerAs: 'eventCtrl'
+    })
       .otherwise({
         redirectTo: '/'
       });

@@ -8,7 +8,7 @@
  * Controller of the loqalusClientApp
  */
 angular.module('loqalusClientApp')
-  .controller('MainCtrl',  ['$scope', 'NgMap', 'geolocationSvc' , 'mapService', '$uibModal', 'templateFactory', 'newActionPage', function ($scope, NgMap, geolocationSvc, mapService, $uibModal, templateFactory, newActionPage) {
+  .controller('MainCtrl',  ['$scope', 'NgMap', 'geolocationSvc' , 'mapService', '$uibModal', 'templateFactory', 'newActionPage', '$compile', function ($scope, NgMap, geolocationSvc, mapService, $uibModal, templateFactory, newActionPage, $compile) {
   	var main = this;
   	main.zoom = 15;
     var modalInstance;
@@ -60,6 +60,10 @@ angular.module('loqalusClientApp')
       });
     }
 
+    main.goToPage = function() {
+      console.log('pin')
+    }
+
     function openModal(){
       modalInstance = $uibModal.open({
         template: templateFactory.getCreatePinsOne(),
@@ -80,38 +84,107 @@ angular.module('loqalusClientApp')
         initDropPinButton(map);
         mapService.getPins(position.coords.latitude, position.coords.longitude, dist).success(function success(response){
           pins = response.pins;
-          for(var i = 0; i < pins.length; i ++)
+          var blurbs = []
+          var counter = 0;
+          console.log(pins)
+          for(var pin in pins)
           {
-            var imageColor = pinsColors[pins[i].action_type];
-            var imageUrl = baseImageUrl + imageColor;
-            var lat = pins[i].latitude;
-            var lng = pins[i].longitude;
-            var title = pins[i].title;
-            var contentString = '<div id="content">'+
-                                '<div id="siteNotice">'+
-                                '</div>'+
-                                '<h2 id="firstHeading" class="firstHeading">'+ pins[i].title + '</h1>'+
-                                '<div id="bodyContent">'+
-                                '<p><b>'+ pins[i].title + '</b>' + pins[i].description + '</p>'+
-                                '</div>'+
-                                '</div>';
+            (function(currentPin){
+              console.log(currentPin);
+              var imageColor = pinsColors[currentPin.action_type];
+              var imageUrl = baseImageUrl + imageColor;
+              var lat = currentPin.latitude;
+              var lng = currentPin.longitude;
+              var title = currentPin.title;
 
-            var infowindow = new google.maps.InfoWindow({
-              content: contentString
+              // Create marker 
+              var marker = new google.maps.Marker({
+                title: title,
+                position: new google.maps.LatLng(lat, lng),
+                map: map,
+                animation: google.maps.Animation.DROP,
+                icon: imageUrl
+              });
+
+             var  content=document.createElement('div'),
+                  button;
+                  content.innerHTML='<h2 class="firstHeading">'+ title + '</h2> <br>'+
+                                  '<div id="bodyContent">'+
+                                  '<p>' + currentPin.description + '</p>'+
+                                  '</div>';
+                  button=content.appendChild(document.createElement('button'));
+                  button.value='Learn More'
+                  google.maps.event.addDomListener(button,'click', 
+                    function(){
+                      console.log(currentPin);
+                    })
+              // var idForBlurb = title;
+              // var contentString = '<div ng-controller="MainCtrl as main" id="content">'+
+              //                     '<div id="siteNotice">'+
+              //                     '</div>'+
+              //                     '<h2 id="firstHeading" class="firstHeading">'+ pins[i].title + '</h1>'+
+              //                     '<div id="bodyContent">'+
+              //                     '<p><b>'+ pins[i].title + '</b>' + pins[i].description + '</p>'+
+              //                     '</div>'+'<button id="'+idForBlurb+'"' + 'onClick="main.goToPage()">' +'Learn More'+ '</button>'
+              //                     +'</div>';
+
+              var infowindow = new google.maps.InfoWindow({
+                content: content
+              });
+
+              // blurbs.push(infowindow);
+
+
+            // document.getElementById(pins[i].title).addEventListener("click", function(){
+            //   console.log(pins[i]);
+            // });
+              // var compiledContent = $compile(contentString)($scope)
+
+
+              // google.maps.event.addListener(marker, 'click', (function(marker, infowindow) {
+              //     return function() {
+              //         infowindow.open(map, marker);
+              //     };
+              // })(marker, infowindow));
+
+                  // google.maps.event.addListener(infowindow, 'domready', function() {
+                  //   console.log(idForBlurb)
+                  //     document.getElementById(idForBlurb).addEventListener("click", function() {
+                  //       console.log("bro");
+                  //       console.log(idForBlurb);
+                  // });
+                  // });
+
+
+            // google.maps.event.addListener(marker,'click', (function(marker,infowindow,map, blurbs){ 
+            //     for(var j =0; j < blurbs.length; j++)
+            //       {
+            //           blurbs[j].close();
+            //       }
+            //       console.log(marker);
+            //       console.log(infowindow);
+            //     infowindow.open(map,marker);
+            // })(marker,infowindow,map, blurbs));
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setOptions({
+                    content: content,
+                    map: map,
+                    position: new google.maps.LatLng(lat, lng)
+                });
             });
-          var marker = new google.maps.Marker({
-            title: title,
-            position: new google.maps.LatLng(lat, lng),
-            map: map,
-            animation: google.maps.Animation.DROP,
-            icon: imageUrl
-          });
-
-          google.maps.event.addListener(marker,'click', (function(marker,infowindow){ 
-            return function() {
-              infowindow.open(map,marker);
-            };
-          })(marker,infowindow));  
+          //  counter++;
+          //  if(counter < 10)
+          //  {
+          //   if(google.maps.geometry.spherical.computeDistanceBetween(latlngPos, theLatLng) < 25000)
+          //   {
+          //      bounds.extend(latlngPos);
+          //   }
+          //  }
+          //  if(counter == 10 || counter == response.length)
+          //  {
+          //   map.fitBounds(bounds);
+          //  }
+          })(pin);
         }
         }).error(function error(response){
           console.log("Some error occured while getting pins.")
