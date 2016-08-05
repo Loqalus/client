@@ -106,7 +106,7 @@ angular.module('loqalusClientApp')
                 icon: imageUrl
               });
 
-             var  content=document.createElement('div'),
+             var  content = document.createElement('div'),
                   button;
                   content.innerHTML='<h2 class="firstHeading">'+ title + '</h2> <br>'+
                                   '<div id="bodyContent">'+
