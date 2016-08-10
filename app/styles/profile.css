@@ -1,24 +1,38 @@
-.profile-container {
 
+body {
+  font-family: helvetica, garamond;
 }
 
-
-.profile-page-img {
-	max-width: 100%;
-	max-height: 200 px;
+h1 {
+  color: white;
+  position: relative;
+  background: black;
+  height: 90px;
+  font-size: 300%;
+  padding-top: 15px;
+  padding-left: 15px;
 }
 
-
-.profile-content{
-	
-	position:absolute;
-	right:0;
-	top:0;
+h1:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -9999px;
+    right: 0;
+    border-left: 9999px solid black;
+    box-shadow: 9999px 0 0 black;
 }
 
+.btn-warning {
+  background-color: #FF6464;
+  font-weight: 140%;
+}
 
-
-
-.profile-user-info{
-
+.user-options {
+  align: center;
+  position: absolute;
+  padding-left: 20px;
+  margin-top: -25px;
+  margin-bottom: 50px;
 }
