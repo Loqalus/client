@@ -7,7 +7,7 @@
  * # CrtEventMdlCtrl
  * Controller of the loqalusClientApp
  */
-angular.module('loqalusClientApp').controller('CrtEventMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', function ($scope, newActionPage, $uibModalInstance, $uibModal) {
+angular.module('loqalusClientApp').controller('CrtEventMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window) {
 
   var vm = this;
   vm.inHouse = true;
@@ -54,6 +54,8 @@ angular.module('loqalusClientApp').controller('CrtEventMdlCtrl', ['$scope', 'new
     vm.newEvent.start_date = datetime;
     newActionPage.createEvent(vm.newEvent)
     .success(function (data, status, headers, config) {
+      vm.close();
+      $window.location.href = "/#/event/" + data.message.id;
       console.log("success");
     })
     .error(function (data, status, header, config) {

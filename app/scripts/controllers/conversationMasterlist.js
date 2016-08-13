@@ -9,13 +9,13 @@
  */
 angular.module('loqalusClientApp')
   .controller('conversationMasterlist', ['$scope', '$window', '$http', function($scope, $window, $http){
-
-		$scope.allConversations = [];
+    var vm = this;
+		vm.allConversations = [];
 
   	var setupConversations = function(){
       var url = "http://localhost:8000/api/conversations"
   		$http.get(url).then(function(response){ 
-				$scope.allConversations = response.data.conversations;
+				vm.allConversations = response.data.conversations;
 				console.log(response.data)
   		});
   	};

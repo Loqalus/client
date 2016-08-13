@@ -41,7 +41,7 @@ angular.module('loqalusClientApp').factory('userFactory', ['$http', function ($h
   }
 
   function signIn() {
-
+    
   }
 
   function signOut() {

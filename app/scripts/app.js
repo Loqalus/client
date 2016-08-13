@@ -37,17 +37,17 @@ angular
     .when('/events', {
       templateUrl: 'views/events.html',
       controller: 'eventMasterlist',
-      controllerAs: 'events'
+      controllerAs: 'vm'
     })
     .when('/conversations', {
       templateUrl: 'views/conversations.html',
       controller: 'conversationMasterlist',
-      controllerAs: 'conversations'
+      controllerAs: 'vm'
     })
     .when('/campaigns', {
       templateUrl: 'views/campaigns.html',
       controller: 'campaignMasterlist',
-      controllerAs: 'campaigns'
+      controllerAs: 'vm'
     })
     .when('/profile', {
       templateUrl: 'views/profile.html',

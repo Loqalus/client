@@ -8,17 +8,26 @@
  * Controller of the loqalusClientApp
  */
 angular.module('loqalusClientApp')
-  .controller('eventMasterlist', ['$scope', '$window', '$http', function($scope, $window, $http){
-
-  	$scope.allEvents = [];
+  .controller('eventMasterlist', ['$window', '$http', function($window, $http){
+    var vm = this;
+  	vm.allEvents = [];
+    vm.style = "z-depth-3";
 
   	var setupEvents = function(){
       var url = "http://localhost:8000/api/events"
   		$http.get(url).then(function(response){ 
-				$scope.allEvents = response.data.events;
+				vm.allEvents = response.data.events;
 				console.log(response.data);
   		});
   	};
+
+    vm.enter = function(){
+      vm.style = "z-depth-4";
+    }
+
+    vm.leave = function(){
+      vm.style = "z-depth-3";
+    }
 
 		setupEvents();
 

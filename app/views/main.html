@@ -1,5 +1,18 @@
-<div class="jumbotron">
- <ng-map zoom="{{main.zoom}}" center="[{{main.lat}}, {{main.lng}}]"></ng-map>
+<div class="container-fluid">
+ <ng-map zoom="{{main.zoom}}" center="[{{main.lat}}, {{main.lng}}]" scrollWheel="false" disable-default-u-i="true" zoom-control="true" streetViewControl="false">
+    <drawing-manager
+      on-overlaycomplete="main.onMapOverlayCompleted(this)"
+      drawing-control-options="{position: 'BOTTOM_CENTER', drawingModes:['marker']}"
+      drawingControl="true"
+      drawingMode="null"
+      markerOptions="{fillColor: '#000000',
+          fillOpacity: 1,
+          strokeWeight: 5,
+          clickable: false,
+          editable: true,
+        }">
+    </drawing-manager>
+</ng-map>
 </div>
 
 <div class="row marketing">

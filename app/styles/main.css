@@ -93,9 +93,28 @@ body {
   }
 }
 
+.learn-more {
+  background-color: #ff6666;
+  color:#fff;
+  border:none !important;
+}
+
+.learn-more:hover {
+  background-color: #ff3333 !important;
+  color:#fff;
+  border:none !important;
+}
+
 button {
   background-color: #ff6666;
   color:#fff;
+  border:none !important;
+}
+
+button:hover {
+  background-color: #ff3333 !important;
+  color:#fff;
+  border:none !important;
 }
 
 .btn-success {
@@ -178,4 +197,50 @@ z-index: 0;
 }
 .startsomethingmodal.modal-body {
 
+}
+
+.ng-cloak { 
+  display:none !important;
+}
+
+.jumbotron {
+
+}
+
+.material-card {
+ box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.material-card:hover {
+ box-shadow: 0 4px 6px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.card__image {
+  border-radius: 1px 1px 0 0;
+  left: -100%;
+  right: 0;
+  top: 0;
+  max-height: 0;
+  opacity: 0; 
+}
+
+.card__title {
+top: 135px; }
+
+
+/*// text element
+*/.card__text {
+top: 176px; }
+
+
+.card__action-bar {
+left: 0; }
+
+.background-div
+{
+    background: url("https://i.ytimg.com/vi/rUJT0UtztvA/maxresdefault.jpg") no-repeat center center; 
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
 }

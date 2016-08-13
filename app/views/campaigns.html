@@ -1,10 +1,13 @@
-<div ng-app="loqalusClientApp">
-	<div ng-controller="campaignMasterlist">
-		
+<div  ng-repeat="camp in vm.allCampaigns">
+<div class="jumbotron">
 
-	</div>
+
+  <h1>{{camp.title}}</h1>
+
+  <p>{{camp.description}}</p>
+
+  <p><a ng-show="{{camp.in_house}}" ng-href="#/campaign/{{camp.id}}" class="btn btn-success btn-lg">Learn more</a>
+	<a target="_blank" ng-hide="{{camp.in_house}}" ng-href="{{camp.link}}" class="btn btn-success btn-lg">Learn more</a>
+  </p>
 </div>
-
-
-
 

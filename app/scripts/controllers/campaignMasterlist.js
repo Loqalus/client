@@ -2,30 +2,23 @@
 
 /**
  * @ngdoc function
- * @name loqalusClientApp.controller:convoMasterlist
+ * @name loqalusClientApp.controller:campaignMasterlist
  * @description
- * # convoMasterlist
+ * # campaignMasterlist
  * Controller of the loqalusClientApp
  */
 angular.module('loqalusClientApp')
-  .controller('campaignMasterlist', ['$scope', '$window', '$http', function($scope, $window, $http){
-
-		$scope.allCampaigns = [];
+  .controller('campaignMasterlist', ['$window', '$http', function($window, $http){
+    var vm = this;
+		vm.allCampaigns = [];
 
   	var setupCampaigns = function(){
      var url = "http://localhost:8000/api/campaigns"
   		$http.get(url).then(function(response){ 
-				$scope.allConversations = response.data.campaigns;
+				vm.allCampaigns = response.data.campaigns;
 				console.log(response.data)
   		});
   	};
 
-  	setupConversations();
-
-
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  	setupCampaigns();
   }]);

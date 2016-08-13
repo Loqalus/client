@@ -7,7 +7,7 @@
  * # CrtConvoMdlCtrl
  * Controller of the loqalusClientApp
  */
-angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', function ($scope, newActionPage, $uibModalInstance, $uibModal) {
+angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window) {
 
   var vm = this;
   vm.inHouse = true;
@@ -50,10 +50,12 @@ angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'new
     vm.convo.longitude = loc.lng;
     newActionPage.createConversation(vm.convo)
     .success(function (data, status, headers, config) {
-    console.log("success");
+      vm.close();
+      $window.location.href = "/#/conversation/" + data.message.id;
+      console.log("success");
     })
     .error(function (data, status, header, config) {
-    console.log("error");
+      console.log("error");
     });
   }
 
