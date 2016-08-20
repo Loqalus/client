@@ -1,20 +1,47 @@
-    <link rel="stylesheet" href="/app/styles/profile.css">
-		<div class="user-name">
-			<h1>Salvador Munoz</h1>
-		</div>
-    
-    <div class="user-options">
-      <button type="button" class="btn btn-warning btn-lg" href="">Profile</button>
-      <button type="button" class="btn btn-warning btn-lg" href="">Campaigns</button>
-      <button type="button" class="btn btn-warning btn-lg" href="">Activity</button>
-    </div>
-    
-    <section>
-      <div class="about-me">
-      	<p>About Me</p>
-      </div>
+<link rel="stylesheet" href="/app/styles/profile.css">
+<div class="user-name">
+	<h1>Salvador Munoz</h1>
+</div>
 
-      <div class="user-info">
-          <p>Name</p> 
-      </div>
-    </section>
+<div class="user-options">
+  <a class="profile"><button type="button" class="btn btn-warning btn-lg">Profile</button></a>
+  <a class="campaigns"><button type="button" class="btn btn-warning btn-lg">Campaigns</button></a>
+  <a href="activity"><button type="button" class="btn btn-warning btn-lg">Activity</button></a>
+</div>
+
+<div class="col-*-*">
+  <div id="user-profile">
+  	<p>About Me</p>
+  </div>
+
+  <div id="user-info">
+    <p>Name</p> 
+  </div>
+
+  <div id="activity">
+    <p>Activity</p>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+      $('body').on('click', ".profile", function(){
+          $("#user-profile").slideToggle();
+      });
+  });
+
+  $(document).ready(function(){
+      $('body').on('click', ".campaigns", function(){
+          $("#user-info").slideToggle();
+      });
+  });
+
+  $(document).ready(function(){
+      $('body').on('click', ".activity", function(){
+          $("#activity").slideToggle();
+      });
+  });
+</script>
+
+
+
