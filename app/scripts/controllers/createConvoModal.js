@@ -7,7 +7,7 @@
  * # CrtConvoMdlCtrl
  * Controller of the loqalusClientApp
  */
-angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window) {
+angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', '$http', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window, $http) {
 
   var vm = this;
   vm.inHouse = true;
@@ -15,6 +15,7 @@ angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'new
   vm.type;
   vm.close;
   vm.toggle;
+  vm.allTags = [];
   vm.convo = {
     title: null,
     description: null,
@@ -25,6 +26,27 @@ angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'new
     in_house: null,
     action_type: 2
   };
+
+    vm.addTag = function(){
+      console.log("interest added")
+      console.log(vm.tag);
+      vm.convoTags.push(vm.tag);
+      console.log(vm.eventTags);
+      vm.tag = '';
+    };
+
+  vm.loadTags = function(){
+  vm.convoTags = [];
+  var url = "http://localhost:8000/api/tag";
+  $http.get(url).success(function(response){
+    for(var k in response.tags){
+      vm.allTags.push(response.tags[k].name);
+    }
+    console.log(vm.allTags);
+  }).error(function(response){
+    console.log(response);
+  })
+};
 
   vm.toggle = function(){
     return vm.inHouse;
@@ -48,6 +70,7 @@ angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'new
     var loc = newActionPage.getLatLng();
     vm.convo.latitude = loc.lat;
     vm.convo.longitude = loc.lng;
+    vm.convo.tag_list = vm.convoTags;
     newActionPage.createConversation(vm.convo)
     .success(function (data, status, headers, config) {
       vm.close();
@@ -59,4 +82,5 @@ angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'new
     });
   }
 
+  vm.loadTags();
 }]);

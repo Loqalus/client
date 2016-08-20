@@ -17,7 +17,6 @@ angular.module('loqalusClientApp')
       var url = "http://localhost:8000/api/events"
   		$http.get(url).then(function(response){ 
 				vm.allEvents = response.data.events;
-				console.log(response.data);
   		});
   	};
 

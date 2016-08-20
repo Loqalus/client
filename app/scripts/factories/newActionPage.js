@@ -11,8 +11,8 @@ angular.module('loqalusClientApp').factory('newActionPage', ['$http', 'userFacto
 
   var type = null;
   var baseUrl = "http://localhost:8000/";
-  var auth = userFactory.getAuthToken();
-  var user_id = userFactory.getUserId();
+  var auth;
+  var user_id;
   user_id = 1;
   var lat = null;
   var lng = null;

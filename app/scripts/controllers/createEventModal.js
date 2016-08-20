@@ -7,7 +7,7 @@
  * # CrtEventMdlCtrl
  * Controller of the loqalusClientApp
  */
-angular.module('loqalusClientApp').controller('CrtEventMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window) {
+angular.module('loqalusClientApp').controller('CrtEventMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', '$http', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window, $http) {
 
   var vm = this;
   vm.inHouse = true;
@@ -16,10 +16,32 @@ angular.module('loqalusClientApp').controller('CrtEventMdlCtrl', ['$scope', 'new
   vm.close;
   vm.toggle;
   vm.mytime = new Date();
+  vm.allTags = [];
 
   vm.close = function(){
     $uibModalInstance.close();
   }
+
+    vm.addTag = function(){
+      console.log("interest added")
+      console.log(vm.tag);
+      vm.eventTags.push(vm.tag);
+      console.log(vm.eventTags);
+      vm.tag = '';
+    };
+
+  vm.loadTags = function(){
+  vm.eventTags = [];
+  var url = "http://localhost:8000/api/tag";
+  $http.get(url).success(function(response){
+    for(var k in response.tags){
+      vm.allTags.push(response.tags[k].name);
+    }
+    console.log(vm.allTags);
+  }).error(function(response){
+    console.log(response);
+  })
+};
 
   vm.newEvent = {
     title: null,
@@ -48,6 +70,7 @@ angular.module('loqalusClientApp').controller('CrtEventMdlCtrl', ['$scope', 'new
     var loc = newActionPage.getLatLng();
     vm.newEvent.latitude = loc.lat;
     vm.newEvent.longitude = loc.lng;
+    vm.newEvent.tag_list = vm.eventTags;
     var date = vm.dt.toISOString().split('T')[0];
     var time = vm.mytime.toISOString().split('T')[1];
     var datetime = date + 'T'+ time;
@@ -119,5 +142,7 @@ angular.module('loqalusClientApp').controller('CrtEventMdlCtrl', ['$scope', 'new
 
     return '';
   }
+
+  vm.loadTags();
 
 }]);
