@@ -1,27 +1,34 @@
 <link rel="stylesheet" href="/app/styles/profile.css">
 <div class="user-name">
-	<h1>Salvador Munoz</h1>
+  <h1>Salvador Munoz</h1>
 </div>
 
 <div class="user-options">
   <a class="profile"><button type="button" class="btn btn-warning btn-lg">Profile</button></a>
-  <a class="campaigns"><button type="button" class="btn btn-warning btn-lg">Campaigns</button></a>
-  <a href="activity"><button type="button" class="btn btn-warning btn-lg">Activity</button></a>
+  <a class="tags"><button type="button" class="btn btn-warning btn-lg">Tags</button></a>
+  <a class="activity"><button type="button" class="btn btn-warning btn-lg">Activity</button></a>
 </div>
 
-<div>
-  <div id="user-profile">
-  	<p>About Me</p>
+<div class="row">
+  <div class="center" id="user-profile">
+    <h2>About Me</h2>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+</p>
   </div>
 
-  <div id="user-tags">
-    <p>Name</p> 
+  <div class="center" id="user-tags">
+    <h2>Tags</h2> 
+    <a href="http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_button_elements&stacked=h" class="btn btn-info" role="button">Tag Button</a>
   </div>
 
-  <div id="activity">
-    <p>Activity</p>
+  <div class="center" id="user-activity">
+    <h2>Activity</h2>
   </div>
 </div>
+
+
+
+
 
 <script>
   $(document).ready(function(){
@@ -31,14 +38,14 @@
   });
 
   $(document).ready(function(){
-      $('body').on('click', ".campaigns", function(){
+      $('body').on('click', ".tags", function(){
           $("#user-tags").slideToggle();
       });
   });
 
   $(document).ready(function(){
       $('body').on('click', ".activity", function(){
-          $("#activity").slideToggle();
+          $("#user-activity").slideToggle();
       });
   });
 </script>
