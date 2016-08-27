@@ -36,3 +36,15 @@ h1:before {
   margin-top: -25px;
   margin-bottom: 50px;
 }
+
+#user-profile {
+  display: none;
+}
+
+#user-tags {
+  display: none;
+}
+
+#activity {
+  display: none;
+}

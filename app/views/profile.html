@@ -9,12 +9,12 @@
   <a href="activity"><button type="button" class="btn btn-warning btn-lg">Activity</button></a>
 </div>
 
-<div class="col-*-*">
+<div>
   <div id="user-profile">
   	<p>About Me</p>
   </div>
 
-  <div id="user-info">
+  <div id="user-tags">
     <p>Name</p> 
   </div>
 
@@ -32,7 +32,7 @@
 
   $(document).ready(function(){
       $('body').on('click', ".campaigns", function(){
-          $("#user-info").slideToggle();
+          $("#user-tags").slideToggle();
       });
   });
 
