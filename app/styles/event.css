@@ -5,7 +5,7 @@ body {
 h1 {
   color: white;
   position: relative;
-  background: black;
+  background: #24167c;
   height: 90px;
   font-size: 300%;
   padding-top: 15px;
@@ -19,23 +19,42 @@ h1:before {
     bottom: 0;
     left: -9999px;
     right: 0;
-    border-left: 9999px black;
-    box-shadow: 9999px 0 0 black;
+    border-left: 9999px #24167c;
+    box-shadow: 9999px 0 0 #24167c;
 }
 
-.specifics, .description {
+.event-details {
+  align: center;
+  position: absolute;
+  padding-left: 20px;
+  margin-top: -25px;
+  margin-bottom: 50px;
+  z-index: 2;
+}
+
+#event-info, #event-description, #event-tags {
   margin: 0 auto;
+  background: #fff9f2;
   position: relative;
   border-radius: 12px;
   padding: 30px;
   max-width: 80%;
+  z-index: 1;
+}
+
+#event-description, #event-tags {
+  display: none;
+}
+
+img {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
   z-index: 0;
+  max-width: 80%;
 }
-
-.description {
-  background: #fff9f2;
-}
-
 
 .comments {
   margin: 20px auto;

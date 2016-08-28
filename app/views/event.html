@@ -1,4 +1,4 @@
-    <div id="user-banner">		<img src="http://14544-presscdn-0-64.pagely.netdna-cdn.com/wp-content/uploads/2014/05/Norfolk-Southern-Chicago.jpg" id ="banner" alt="" />
+<!--     <div id="user-banner">		<img src="http://14544-presscdn-0-64.pagely.netdna-cdn.com/wp-content/uploads/2014/05/Norfolk-Southern-Chicago.jpg" id ="banner" alt="" />
 </div>
    <link rel="stylesheet" href="app/styles/conversation.css">
 		<div class="conversation">
@@ -16,13 +16,85 @@
   <div>
   	<textarea ng-model="eventCtrl.newComment" placholder="Add a comment"></textarea>
   	<button class="btn btn-success" type="button" ng-disabled="eventCtrl.disablePostComment()" ng-click="eventCtrl.addComment()">Post</button>  <button class="btn btn-success" ng-click="eventCtrl.cancelComment()">Cancel</button>
+  </div> -->
+
+
+
+
+<link rel="stylesheet" href="app/styles/event.css">
+
+<div class="event-header">
+  <h1>{{eventCtrl.theEvent.title}} — Date Time</h1>
+</div>
+
+<div class="event-details">
+  <a class="info"><button type="button" class="btn btn-danger btn-lg">Details</button></a>
+  <a class="tags"><button type="button" class="btn btn-danger btn-lg">Tags</button></a>
+  <a class="description"><button type="button" class="btn btn-danger btn-lg">Description</button></a>
+</div>
+
+
+<div class="row">
+	<div class="center" id="event-info">
+  	<h2>Event Title</h2>
+    <p>Event</p>
+    <p>Time</p>
+    <p>Address</p>
+	</div>
+
+  <div class="center" id="event-tags">
+    <h2>Tags</h2> 
+    <a href="#" class="btn btn-info" role="button">Tag Button</a>
   </div>
-		<section class="flex-comments">
-		  <div id="comments">
-				<div ng-repeat="item in eventCtrl.comments">
-					<div> <h3>{{item.user.name}}</h3>
-						{{item.comment}}
-					</div>
-				</div>
-		  </div>  
-		</section> 
+
+  <div class="center" id="event-description">
+    <h2>Description</h2>
+    <p>{{eventCtrl.theEvent.description}}</p>
+  </div>
+  
+	<div class="container">
+	  <img src="http://14544-presscdn-0-64.pagely.netdna-cdn.com/wp-content/uploads/2014/05/Norfolk-Southern-Chicago.jpg" class="img-responsive img-rounded" style="display: block; margin-left: auto; margin-right: auto;" id="event-image">
+	</div> 
+
+</div>
+
+
+
+
+<div class="comments">
+	<textarea ng-model="eventCtrl.newComment" placholder="Add a comment"></textarea>
+	<br>
+	<button class="btn btn-success" type="button" ng-disabled="eventCtrl.disablePostComment()" ng-click="eventCtrl.addComment()">Post</button>  <button class="btn btn-success" ng-click="eventCtrl.cancelComment()">Cancel</button>
+
+	<section>
+		<div ng-repeat="item in eventCtrl.comments">
+			<div> <h3>{{item.user.name}}</h3>
+				{{item.comment}}
+			</div>
+		</div>
+	</section> 
+</div>
+
+
+
+
+<script>
+	$(document).ready(function(){
+    $('body').on('click', ".info", function(){
+        $("#event-info").slideToggle();
+    });
+});
+
+$(document).ready(function(){
+    $('body').on('click', ".tags", function(){
+        $("#event-tags").slideToggle();
+    });
+});
+
+
+$(document).ready(function(){
+    $('body').on('click', ".description", function(){
+        $("#event-description").slideToggle();
+    });
+});
+</script>
