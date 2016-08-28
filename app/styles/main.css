@@ -235,6 +235,10 @@ top: 176px; }
 .card__action-bar {
 left: 0; }
 
+#mission {
+  text-align: center;
+}
+
 .background-div
 {
     background: url("https://i.ytimg.com/vi/rUJT0UtztvA/maxresdefault.jpg") no-repeat center center; 
