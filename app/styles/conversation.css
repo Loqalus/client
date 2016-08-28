@@ -1,54 +1,51 @@
-.conversation {
-  margin: auto;
-  width: 100%;
+body {
+  font-family: helvetica, garamond;
 }
 
-#user-banner {
-  background-image:  url("http://14544-presscdn-0-64.pagely.netdna-cdn.com/wp-content/uploads/2014/05/Norfolk-Southern-Chicago.jpg");
+h1 {
+  color: white;
+  position: relative;
+  background: black;
+  height: 90px;
+  font-size: 300%;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
+h1:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -9999px;
+    right: 0;
+    border-left: 9999px black;
+    box-shadow: 9999px 0 0 black;
+}
+
+.specifics, .description {
+  margin: 0 auto;
+  position: relative;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 80%;
+  z-index: 0;
+}
+
+.description {
+  background: #fff9f2;
 }
 
 
-.conversation .header{
+.comments {
+  margin: 20px auto;
+  background: #f7f7f7;
+  position: relative;
+  border-radius: 12px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  max-width: 80%;
   text-align: center;
-  font-family: arial, sans-serif;
-  font-size: 60px;
-  margin: 3px;
-  font-weight: bold;
+  z-index: 1;
 }
 
-.flex-convo {
-  display: flex;
-  justify-content: center;
-  margin: 7px ;
-  background-color: #E6E7E9;
-  flex-wrap: wrap;
-}
-
-.flex-convo #tags, #conversations, #contributors {
-  margin: 10px;
-}
-
-.flex-convo #tags {
-  background-color: red;
-  max-width: 20%;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-.flex-convo #conversations {
-  max-width: 60%;
-}
-
-.flex-convo #contributors {
-  background-color: #F1F1F1;
-  max-width: 20%;
-  border-radius: 10px;
-  padding: 10px;
-}
-
-.flex-comments {
-  display: flex;
-  justify-content: center;
-  margin: 7px ;
-  background-color: purple;
-}

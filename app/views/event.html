@@ -44,7 +44,7 @@
 
   <div class="center" id="event-tags">
     <h2>Tags</h2> 
-    <a href="http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_button_elements&stacked=h" class="btn btn-info" role="button">Tag Button</a>
+    <a href="#" class="btn btn-info" role="button">Tag Button</a>
   </div>
 
   <div class="center" id="event-description">
@@ -66,13 +66,17 @@
 	<br>
 	<button class="btn btn-success" type="button" ng-disabled="eventCtrl.disablePostComment()" ng-click="eventCtrl.addComment()">Post</button>  <button class="btn btn-success" ng-click="eventCtrl.cancelComment()">Cancel</button>
 
-<section>
-	<div ng-repeat="item in eventCtrl.comments">
-		<div> <h3>{{item.user.name}}</h3>
-			{{item.comment}}
+	<section>
+		<div ng-repeat="item in eventCtrl.comments">
+			<div> <h3>{{item.user.name}}</h3>
+				{{item.comment}}
+			</div>
 		</div>
-	</div>
-</section> 
+	</section> 
+</div>
+
+
+
 
 <script>
 	$(document).ready(function(){

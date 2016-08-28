@@ -1,4 +1,4 @@
-
+<!-- 
 <img class="conversation" src="http://14544-presscdn-0-64.pagely.netdna-cdn.com/wp-content/uploads/2014/05/Norfolk-Southern-Chicago.jpg" alt="" />
    <link rel="stylesheet" href="app/styles/conversation.css">
 		<div class="conversation">
@@ -25,3 +25,39 @@
         </div>
       </div>  
     </section> 
+
+ -->
+<link rel="stylesheet" href="app/styles/conversation.css">
+
+<div class="convo-header">
+  <h1>{{conversationCtrl.convo.title}}</h1>
+</div>
+
+<div class="container">
+  <div class="row">
+    
+    <div class="col-sm-4 specifics"><h3>Tags:</h3>
+  <a class="btn btn-primary" href="#" role="button">Link</a>  
+    </div>
+
+    <div class="col-sm-8 description"><p>{{conversationCtrl.convo.description}}</p></div>
+    
+  </div>  
+</div>  
+
+<div class="comments">
+  <div>  
+    <textarea ng-model="conversationCtrl.newComment" placholder="Add a comment"></textarea>
+    <button class="btn btn-success" type="button" ng-disabled="conversationCtrl.disablePostComment()" ng-click="conversationCtrl.addComment()">Post</button>  <button class="btn btn-success" ng-click="conversationCtrl.cancelComment()">Cancel</button>
+  </div>
+    <section class="flex-comments">
+      <div id="comments">
+        <div ng-repeat="item in conversationCtrl.comments">
+          <div> <h3>{{item.user.name}}</h3>
+            {{item.comment}}
+          </div>
+        </div>
+      </div>  
+    </section> 
+
+</div>
