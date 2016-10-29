@@ -8,8 +8,9 @@
  * Controller of the loqalusClientApp
  */
 angular.module('loqalusClientApp')
-  .controller('signInAndModalCtrl', ['userFactory', '$uibModalInstance', '$window', '$http',function (userFactory, $uibModalInstance, $window, $http) {
+  .controller('signInAndModalCtrl', ['userFactory', '$uibModalInstance', '$window', '$http', 'urlFactory', '$scope', function (userFactory, $uibModalInstance, $window, $http, urlFactory, $scope) {
   	var vm = this;
+    var baseUrl = urlFactory.getBaseUrl();
   	vm.email;
   	vm.password;
   	vm.name;
@@ -18,20 +19,20 @@ angular.module('loqalusClientApp')
   	vm.newPasswordConfirm;
   	vm.bio;
     vm.allInterests = [];
+    vm.data = {error: false};
 
   	vm.Init = function(){
       vm.theirInterests = [];
-  		console.log("opening sign in modal");
       vm.loadTags();
+      vm.error = false;
   	};
 
     vm.loadTags = function(){
-      var url = "http://localhost:8000/api/tag";
+      var url = baseUrl+ "api/tag";
       $http.get(url).success(function(response){
         for(var k in response.tags){
           vm.allInterests.push(response.tags[k].name);
         }
-        console.log(vm.allInterests);
       }).error(function(response){
         console.log(response);
       })
@@ -39,9 +40,7 @@ angular.module('loqalusClientApp')
 
     vm.addInterest = function(){
       console.log("interest added")
-      console.log(vm.interest);
       vm.theirInterests.push(vm.interest);
-      console.log(vm.theirInterests);
       vm.interest = '';
     };
 
@@ -59,6 +58,7 @@ angular.module('loqalusClientApp')
   			console.log(response);
         vm.close();
   		}).error(function(error){
+        vm.data.error = true;
   			console.log(error);
   		});
   	};

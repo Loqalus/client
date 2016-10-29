@@ -21,7 +21,13 @@ angular.module('loqalusClientApp').factory('geolocationSvc', ['$q', '$window', f
                 },
                 function (err) {
                     deferred.reject(err);
-                });
+                }, 
+                {
+                  enableHighAccuracy: true, 
+                  maximumAge        : 30000, 
+                  timeout           : 27000
+                }
+                );
         }
 
         return deferred.promise;

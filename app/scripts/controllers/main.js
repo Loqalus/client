@@ -13,13 +13,18 @@ angular.module('loqalusClientApp')
   	main.zoom = 15;
     var modalInstance;
     var pins = [];
-    var dist = 1;
+    var dist = 3;
     var pinsColors = ["FE7569", "3399ff", "66ff66"]
-    var baseImageUrl = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|";
+    var baseImageUrl = "/images/pin";
 
+    console.log("Grabbing location");
+    var timeStart = new Date();
   	geolocationSvc.getCurrentPosition().then(
   	function(position){
   			initMap(position);
+        var timeEnd = new Date();
+        var seconds = (timeEnd.getTime() - timeStart.getTime())/1000
+        console.log("Getting the postition took " + seconds + " seconds");
   		}
   	);
 
@@ -34,6 +39,8 @@ angular.module('loqalusClientApp')
         }
         else
         {
+
+          getMustSignIn
             alert("Please Create an Account Or Sign In");
             marker.overlay.map = null;
         }
@@ -44,34 +51,51 @@ angular.module('loqalusClientApp')
     }
 
     function openModal(){
-      modalInstance = $uibModal.open({
-        template: templateFactory.getCreatePinsOne(),
-        size: 'lg',
-        controller: 'modalOneCtrl',
-        bindToController: true,
-        controllerAs: 'vm'
-      });
+
+      if($window.localStorage.getItem('auth_token')){
+          modalInstance = $uibModal.open({
+            template: templateFactory.getCreatePinsOne(),
+            size: 'lg',
+            controller: 'modalOneCtrl',
+            bindToController: true,
+            controllerAs: 'vm'
+         });
+      }
+      else{
+          modalInstance = $uibModal.open({
+            template: templateFactory.getMustSignIn(),
+            size: 'md',
+            controller: 'modalOneCtrl',
+            bindToController: true,
+            controllerAs: 'vm'
+         });
+        }
+
     }
 
   	function initMap(position){
 	  	NgMap.getMap().then(function(map) {
+
   	    main.lat = position.coords.latitude;
   	    main.lng = position.coords.longitude;
-        var dist = 1;
+        var dist = 2.8;
         var bounds = new google.maps.LatLngBounds();
+        bounds.extend(new google.maps.LatLng(main.lat, main.lng));
+        console.log(position);
         mapService.getPins(position.coords.latitude, position.coords.longitude, dist).success(function success(response){
           pins = response.pins;
           var blurbs = []
           var counter = 0;
-          console.log(pins.length)
+          // console.log(pins);
           for(var i in pins)
           {
             (function(key){
+              // Only put 10 pins on map
               if(key < 11){
                 bounds.extend(new google.maps.LatLng(pins[key].latitude, pins[key].longitude));
               }
-              var imageColor = pinsColors[pins[key].action_type];
-              var imageUrl = baseImageUrl + imageColor;
+              var imageNum = pins[key].action_type;
+              var imageUrl = baseImageUrl + imageNum + ".png";
               var lat = pins[key].latitude;
               var lng = pins[key].longitude;
               var title = pins[key].title;
@@ -133,7 +157,9 @@ angular.module('loqalusClientApp')
             });
           })(i);
         }
-        map.fitBounds(bounds);
+        if(pins.length>0){
+         map.fitBounds(bounds);
+        }
         }).error(function error(response){
           console.log("Some error occured while getting pins.")
         });

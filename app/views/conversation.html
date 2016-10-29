@@ -27,23 +27,114 @@
     </section> 
 
  -->
-<link rel="stylesheet" href="app/styles/conversation.css">
+
+<!-- <link rel="stylesheet" href="app/styles/conversation.css"> -->
+<style>
+body {
+  font-family: helvetica, garamond;
+}
+
+h1 {
+  color: white;
+  position: relative;
+  background: black;
+  height: 90px;
+  font-size: 300%;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
+h1:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -9999px;
+    right: 0;
+    border-left: 9999px black;
+    box-shadow: 9999px 0 0 black;
+}
+
+.specifics, .description {
+  margin: 0 auto;
+  position: relative;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 80%;
+  z-index: 0;
+}
+
+.description {
+  background: #fff9f2;
+}
+
+
+.convo-details {
+  align: center;
+  position: absolute;
+  padding-left: 20px;
+  margin-top: -25px;
+  margin-bottom: 50px;
+  z-index: 2;
+}
+
+#convo-info, #convo-description, #convo-tags {
+  margin: 0 auto;
+  background: #fff9f2;
+  position: relative;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 80%;
+  z-index: 1;
+}
+
+#convo-description, #convo-tags {
+  display: none;
+}
+
+
+.comments {
+  margin: 20px auto;
+  background: #f7f7f7;
+  position: relative;
+  border-radius: 12px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  max-width: 80%;
+  text-align: center;
+  z-index: 1;
+}
+
+
+</style>
 
 <div class="convo-header">
   <h1>{{conversationCtrl.convo.title}}</h1>
 </div>
+<div class="convo-details">
+  <a class="info"><button type="button" class="btn btn-danger btn-lg">Details</button></a>
+  <a class="tags"><button type="button" class="btn btn-danger btn-lg">Tags</button></a>
+      <a ng-show="conversationCtrl.isOwner"><button type="button" ng-click = "conversationCtrl.editAction()" class="btn btn-danger btn-lg">Edit</button></a>
+  <a ng-show="conversationCtrl.isOwner"><button type="button" ng-click = "conversationCtrl.deleteAction()" class="btn btn-danger btn-lg">Delete Conversation</button></a>
+</div>
 
-<div class="container">
-  <div class="row">
-    
-    <div class="col-sm-4 specifics"><h3>Tags:</h3>
-  <a class="btn btn-primary" href="#" role="button">Link</a>  
+<div class="row">
+  <div class="center" id="convo-info">
+    <h2>{{conversationCtrl.convi.title}}</h2>
+    <h2>Description</h2>
+    <p>{{conversationCtrl.convo.description}}</p>
+
+  </div>
+
+  <div class="center" id="convo-tags">
+    <h2>Tags</h2> 
+    <div ng-repeat="tag in conversationCtrl.tags">
+          <a href='javascript:' class="btn btn-info" role="button">{{tag}}</a>
     </div>
+  </div>
 
-    <div class="col-sm-8 description"><p>{{conversationCtrl.convo.description}}</p></div>
-    
-  </div>  
-</div>  
+</div>
+
 
 <div class="comments">
   <div>  
@@ -61,3 +152,25 @@
     </section> 
 
 </div>
+
+
+<script>
+  $(document).ready(function(){
+    $('body').on('click', ".info", function(){
+        $("#convo-info").slideToggle();
+    });
+});
+
+$(document).ready(function(){
+    $('body').on('click', ".tags", function(){
+        $("#convo-tags").slideToggle();
+    });
+});
+
+
+// $(document).ready(function(){
+//     $('body').on('click', ".description", function(){
+//         $("#convo-description").slideToggle();
+//     });
+// });
+</script>

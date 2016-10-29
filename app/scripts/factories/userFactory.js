@@ -7,9 +7,9 @@
  * # userFactory
  * Current user.
  */
-angular.module('loqalusClientApp').factory('userFactory' , ['$http', '$window', function ($http, $window) {
+angular.module('loqalusClientApp').factory('userFactory' , ['$http', '$window', 'urlFactory', function ($http, $window, urlFactory) {
 
-  var baseUrl = "http://localhost:8000/";
+  var baseUrl = urlFactory.getBaseUrl();
 
   function createUser(newUser) {
     var url = baseUrl + "api/users";
@@ -53,11 +53,18 @@ angular.module('loqalusClientApp').factory('userFactory' , ['$http', '$window', 
     return $window.localStorage.getItem('auth_token');
   }
 
+
+  function getUserId(){
+    return $window.localStorage.getItem('user_id');
+  }
+
   return {
     createUser: createUser,
     signIn: signIn,
     signOut: signOut,
     setUser: setUser,
-    getAuthToken: getAuthToken
+    getAuthToken: getAuthToken,
+    getUserId: getUserId
+
   };
 }]);

@@ -15,7 +15,6 @@ angular.module('loqalusClientApp')
 
     function init(){
         var auth = userFactory.getAuthToken();
-        console.log(auth);
         if(auth){
             nav.isLoggedIn = true;
         }
@@ -50,7 +49,7 @@ angular.module('loqalusClientApp')
     	userFactory.signOut().success(function(response){
             console.log("signed out");
             console.log(response);
-            $window.location.reload();
+            $window.location.href="/";
         }).error(function(response){
             console.log(response);
         });

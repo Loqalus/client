@@ -1,100 +1,87 @@
-<!--     <div id="user-banner">		<img src="http://14544-presscdn-0-64.pagely.netdna-cdn.com/wp-content/uploads/2014/05/Norfolk-Southern-Chicago.jpg" id ="banner" alt="" />
-</div>
-   <link rel="stylesheet" href="app/styles/conversation.css">
-		<div class="conversation">
-		  <p class="header">{{eventCtrl.theEvent.title}}</p>
-		<div>
-  
-		<article class="flex-convo">
-		    <div id="tags">This is going to be where the map and everything of that sort is at</div> 
-		    <div id="conversations">{{eventCtrl.theEvent.description}}</div>
-				<div id="contributors">
-					Thing you do
-				</div>	
-		</article>
 
-  <div>
-  	<textarea ng-model="eventCtrl.newComment" placholder="Add a comment"></textarea>
-  	<button class="btn btn-success" type="button" ng-disabled="eventCtrl.disablePostComment()" ng-click="eventCtrl.addComment()">Post</button>  <button class="btn btn-success" ng-click="eventCtrl.cancelComment()">Cancel</button>
-  </div> -->
+    <section id="blog" class="container">
+        <div class="center">
+            <h2>Event</h2>
+            <p class="lead">{{eventCtrl.theEvent.title}}</p>
+        </div>
 
-
-
-
-<link rel="stylesheet" href="app/styles/event.css">
-
-<div class="event-header">
-  <h1>{{eventCtrl.theEvent.title}} — Date Time</h1>
-</div>
-
-<div class="event-details">
-  <a class="info"><button type="button" class="btn btn-danger btn-lg">Details</button></a>
-  <a class="tags"><button type="button" class="btn btn-danger btn-lg">Tags</button></a>
-  <a class="description"><button type="button" class="btn btn-danger btn-lg">Description</button></a>
-</div>
+        <div class="blog">
+            <div class="row">
+  <a ng-show="eventCtrl.isOwner"><button type="button" ng-click = "eventCtrl.editAction()" class="btn btn-danger btn-lg">Edit</button></a>
+  <a ng-show="eventCtrl.isOwner"><button type="button" ng-click = "eventCtrl.deleteAction()" class="btn btn-danger btn-lg">Delete Event</button></a>
+                 <div class="col-md-8">
+                    <div class="blog-item">
+                        <div class="row">
+                                
+                            <div class="col-xs-12 col-sm-10 blog-content">
+                                <a href="#"><img class="img-responsive img-blog" src="images/backdrop0.jpg" width="100%" alt="" /></a>
+                                <h2><a>{{eventCtrl.theEvent.title}}</a></h2>
+                                <h3>{{eventCtrl.theEvent.description}}</h3>
+                            </div>
+                        </div>    
+                    </div><!--/.blog-item-->
+                </div><!--/.col-md-8-->
 
 
-<div class="row">
-	<div class="center" id="event-info">
-  	<h2>Event Title</h2>
-    <p>Event</p>
-    <p>Time</p>
-    <p>Address</p>
-	</div>
+                <aside class="col-md-4">
+                    <div class="widget tags">
+                        <h3>Tags</h3>
+                        <ul class="tag-cloud">
+                            <li ng-repeat="tag in eventCtrl.tags"><a class="btn btn-xs btn-primary" href="#">{{tag}}</a></li>
+                            <p ng-if="eventCtrl.tags.length == 0" class="text-muted">This Event has no Tags</p>
+                        </ul>
 
-  <div class="center" id="event-tags">
-    <h2>Tags</h2> 
-    <a href="#" class="btn btn-info" role="button">Tag Button</a>
-  </div>
+                    </div><!--/.tags-->
+                    <div class="widget categories">
+                        <h3>Created By</h3>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="single_comments">
+                    <img src="images/avatar3.png" alt=""  />
+                    <p>{{eventCtrl.Owner.bio}}</p>
+                                    <div class="entry-meta small muted">
+                                        <span>By <a >{{eventCtrl.Owner.name}}</a></span>
+                                    </div>
+                  </div>
+                            </div>
+                        </div>                     
+                    </div><!--/.recent comments-->
+              </aside>  
+                  </div>
+                        <h1 id="comments_title">{{eventCtrl.comments.length}} Comments</h1>
+                      <div ng-repeat="comment in eventCtrl.comments">
+                        <div class="media comment_section">
+                            <div class="media-body post_reply_comments">
+                                <h3>{{comment.user.name}}</h3>
+                                <h4>{{eventCtrl.dates[$index] | date: 'medium'}}</h4>
+                                <p>{{comment.comment}}</p>
+                                <a ng-if="eventCtrl.isOwner || eventCtrl.createdThisComment($index)" href="" ng-click="eventCtrl.deleteComment($index)" >Delete</a>
+                            </div>
+                        </div>
+                      </div>
+                        <div id="contact-page clearfix">
+                            <div class="status alert alert-success" style="display: none"></div>
+                            <div class="message_heading">
+                                <h4>Leave a Comment</h4>
+                            </div> 
+      
+                            <form class="contact-form" name="contact-form" role="form">
+                                <div class="row">
+                                    <div class="col-sm-7">                        
+                                        <div class="form-group">
+                                            <label>Message *</label>
+                                            <textarea name="message" ng-model="eventCtrl.newComment" required="required" class="form-control" rows="8"></textarea>
+                                        </div>                        
+                                        <div class="form-group">
+                                            <button type="button" ng-disabled="eventCtrl.disablePostComment()" ng-click="eventCtrl.addComment()" class="btn btn-success btn-lg" required="required">Submit Message</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>     
+                        </div><!--/#contact-page-->
+    </section>
 
-  <div class="center" id="event-description">
-    <h2>Description</h2>
-    <p>{{eventCtrl.theEvent.description}}</p>
-  </div>
-  
-	<div class="container">
-	  <img src="http://14544-presscdn-0-64.pagely.netdna-cdn.com/wp-content/uploads/2014/05/Norfolk-Southern-Chicago.jpg" class="img-responsive img-rounded" style="display: block; margin-left: auto; margin-right: auto;" id="event-image">
-	</div> 
-
-</div>
+                    </div><!--/.col-md-8-->
+            </div><!--/.row-->
 
 
-
-
-<div class="comments">
-	<textarea ng-model="eventCtrl.newComment" placholder="Add a comment"></textarea>
-	<br>
-	<button class="btn btn-success" type="button" ng-disabled="eventCtrl.disablePostComment()" ng-click="eventCtrl.addComment()">Post</button>  <button class="btn btn-success" ng-click="eventCtrl.cancelComment()">Cancel</button>
-
-	<section>
-		<div ng-repeat="item in eventCtrl.comments">
-			<div> <h3>{{item.user.name}}</h3>
-				{{item.comment}}
-			</div>
-		</div>
-	</section> 
-</div>
-
-
-
-
-<script>
-	$(document).ready(function(){
-    $('body').on('click', ".info", function(){
-        $("#event-info").slideToggle();
-    });
-});
-
-$(document).ready(function(){
-    $('body').on('click', ".tags", function(){
-        $("#event-tags").slideToggle();
-    });
-});
-
-
-$(document).ready(function(){
-    $('body').on('click', ".description", function(){
-        $("#event-description").slideToggle();
-    });
-});
-</script>

@@ -31,7 +31,6 @@ angular.module('loqalusClientApp')
  	}
 
  	function changeCss(type){
- 		console.log(type);
  		if (type === 'Event'){
 	  	vm.eventClass = 'startanactionChosen';
 	  	vm.campaignClass = 'startanaction';
@@ -50,7 +49,6 @@ angular.module('loqalusClientApp')
  	}
 
 	vm.setType = function(type) {
-		console.log(type);
 		changeCss(type);
 		newActionPage.setType(type)
 	}
@@ -69,24 +67,26 @@ angular.module('loqalusClientApp')
 	}
 
   function openModal(){
-    var modal;
-    var crtl;
-    var type = newActionPage.getType();
-    if(type === 'Event')
-    {
-      modal = templateFactory.getEventModal();
-      crtl = 'CrtEventMdlCtrl';
-    }
-    if(type === 'Campaign')
-    {
-      modal = templateFactory.getCampaignModal();
-      crtl = 'CrtCampMdlCtrl';
-    }
-    if(type === 'Conversation')
-    {
-      modal = templateFactory.getConversationModal();
-      crtl = 'CrtConvoMdlCtrl';
-    }
+    var modal = templateFactory.getInHouseOrOutSrc();
+    var crtl = "modalInhouseCtrl";
+
+    // var type = newActionPage.getType();
+    // if(type === 'Event')
+    // {
+    //   modal = templateFactory.getEventModal();
+    //   crtl = 'CrtEventMdlCtrl';
+    // }
+    // if(type === 'Campaign')
+    // {
+    //   modal = templateFactory.getCampaignModal();
+    //   crtl = 'CrtCampMdlCtrl';
+    // }
+    // if(type === 'Conversation')
+    // {
+    //   modal = templateFactory.getConversationModal();
+    //   crtl = 'CrtConvoMdlCtrl';
+    // }
+
     var modalInstance = $uibModal.open({
       template: modal,
       size: 'lg',

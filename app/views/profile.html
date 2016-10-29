@@ -1,29 +1,85 @@
-<link rel="stylesheet" href="/app/styles/profile.css">
-<div class="user-name">
-  <h1>Salvador Munoz</h1>
+    <!-- build:css(.tmp) styles/profile.css -->
+<!-- <link rel="stylesheet" href="app/styles/profile.css"> -->
+    <!-- endbuild -->
+<style>
+body {
+  font-family: helvetica, garamond;
+}
+
+h1 {
+  color: white;
+  position: relative;
+  background: black;
+  height: 90px;
+  font-size: 300%;
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
+h1:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -9999px;
+    right: 0;
+    border-left: 9999px solid black;
+    box-shadow: 9999px 0 0 black;
+}
+
+.btn-warning {
+  background-color: #FF6464;
+  font-weight: 140%;
+}
+
+.user-options {
+  align: center;
+  position: absolute;
+  padding-left: 20px;
+  margin-top: -25px;
+  margin-bottom: 50px;
+}
+
+#user-profile, #user-activity, #user-tags {
+  margin: 0 auto;
+  background: #fff9f2;
+  position: relative;
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 80%;
+  display: none;
+  z-index: -1;
+}
+
+</style>
+
+
+    <div class="user-name">
+  <h1 >{{profileCtrl.user.name}}</h1>
 </div>
 
 <div class="user-options">
   <a class="profile"><button type="button" class="btn btn-warning btn-lg">Profile</button></a>
-  <a class="tags"><button type="button" class="btn btn-warning btn-lg">Tags</button></a>
-  <a class="activity"><button type="button" class="btn btn-warning btn-lg">Activity</button></a>
+  <a class="tags"><button type="button" class="btn btn-warning btn-lg">Interests</button></a>
+   <a ng-show="profileCtrl.canEdit()"><button type="button" ng-click = "profileCtrl.editProfile()" class="btn btn-warning btn-lg">Edit</button></a>
+  <a ng-show="profileCtrl.canEdit()"><button type="button" ng-click = "profileCtrl.deleteProfile()" class="btn btn-warning btn-lg">Delete Profile</button></a>
+  <!-- <a class="activity"><button type="button" class="btn btn-warning btn-lg">Activity</button></a> -->
 </div>
 
 <div class="row">
   <div class="center" id="user-profile">
     <h2>About Me</h2>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    <p>{{profileCtrl.user.bio}}
 </p>
   </div>
 
   <div class="center" id="user-tags">
-    <h2>Tags</h2> 
-    <a href="http://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_button_elements&stacked=h" class="btn btn-info" role="button">Tag Button</a>
+    <h2>Interests</h2> 
+    <div ng-repeat="interest in profileCtrl.interests">
+          <a href='javascript:' class="btn btn-info" role="button">{{interest}}</a>
+    </div>
   </div>
 
-  <div class="center" id="user-activity">
-    <h2>Activity</h2>
-  </div>
 </div>
 
 
@@ -43,11 +99,11 @@
       });
   });
 
-  $(document).ready(function(){
-      $('body').on('click', ".activity", function(){
-          $("#user-activity").slideToggle();
-      });
-  });
+  // $(document).ready(function(){
+  //     $('body').on('click', ".activity", function(){
+  //         $("#user-activity").slideToggle();
+  //     });
+  // });
 </script>
 
 

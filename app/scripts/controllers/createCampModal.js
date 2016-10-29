@@ -7,10 +7,11 @@
  * # CrtCampMdlCtrl
  * Controller of the loqalusClientApp
  */
-angular.module('loqalusClientApp').controller('CrtCampMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', '$http', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window, $http) {
+angular.module('loqalusClientApp').controller('CrtCampMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', '$http', 'urlFactory', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window, $http, urlFactory) {
 
   var vm = this;
-  vm.inHouse = true;
+  vm.inHouse = newActionPage.getInHouse();
+  var baseUrl = urlFactory.getBaseUrl();
   vm.$onInit;
   vm.type;
   vm.close;
@@ -29,21 +30,17 @@ angular.module('loqalusClientApp').controller('CrtCampMdlCtrl', ['$scope', 'newA
 
 
     vm.addTag = function(){
-      console.log("interest added")
-      console.log(vm.tag);
       vm.campTags.push(vm.tag);
-      console.log(vm.eventTags);
       vm.tag = '';
     };
 
   vm.loadTags = function(){
   vm.campTags = [];
-  var url = "http://localhost:8000/api/tag";
+  var url = baseUrl + "api/tag";
   $http.get(url).success(function(response){
     for(var k in response.tags){
       vm.allTags.push(response.tags[k].name);
     }
-    console.log(vm.allTags);
   }).error(function(response){
     console.log(response);
   })
@@ -64,19 +61,19 @@ angular.module('loqalusClientApp').controller('CrtCampMdlCtrl', ['$scope', 'newA
 
   vm.$onInit = function(){
     vm.type = newActionPage.getType();
-    console.log(newActionPage.getType());
   }
 
   vm.create = function(){
     vm.campaign.in_house = vm.inHouse;
     var loc = newActionPage.getLatLng();
+    vm.campaign.user_id = $window.localStorage.getItem("user_id");
     vm.campaign.latitude = loc.lat;
     vm.campaign.longitude = loc.lng;
     vm.campaign.tag_list = vm.campTags;
     newActionPage.createCampaign(vm.campaign)
     .success(function (data, status, headers, config) {
       vm.close();
-      $window.location.href = "/#/campaign/" + data.message.id;
+      // $window.location.href = "/#/campaign/" + data.message.id;
       console.log("success");
     })
     .error(function (data, status, header, config) {

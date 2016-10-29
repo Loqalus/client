@@ -7,20 +7,20 @@
  * # newActionPage
  * New action page information for modals. 
  */
-angular.module('loqalusClientApp').factory('newActionPage', ['$http', 'userFactory', function ($http, userFactory) {
+angular.module('loqalusClientApp').factory('newActionPage', ['$http', 'userFactory', 'urlFactory' , function ($http, userFactory, urlFactory) {
 
   var type = null;
-  var baseUrl = "http://localhost:8000/";
-  var auth;
-  var user_id;
-  user_id = 1;
+  var inHouse = null;
+  var baseUrl = urlFactory.getBaseUrl();
   var lat = null;
   var lng = null;
 
   function createEvent(newEvent) {
+    newEvent.in_house = inHouse;
     var payload = {
         event: newEvent
     }
+    var user_id = userFactory.getUserId();
     var url = baseUrl + "api/users/" + user_id + "/events";
     var auth = userFactory.getAuthToken();
     var config = {
@@ -33,9 +33,11 @@ angular.module('loqalusClientApp').factory('newActionPage', ['$http', 'userFacto
   }
 
   function createConversation(convo) {
+    convo.in_house = inHouse;
     var payload = {
         conversation: convo
     }
+    var user_id = userFactory.getUserId();
     var url = baseUrl + "api/users/" + user_id + "/conversations";
     var auth = userFactory.getAuthToken();
     var config = {
@@ -48,9 +50,11 @@ angular.module('loqalusClientApp').factory('newActionPage', ['$http', 'userFacto
   }
 
   function createCampaign(campaign) {
+    campaign.in_house = inHouse;
     var payload = {
         campaign: campaign
     }
+    var user_id = userFactory.getUserId();
     var url = baseUrl + "api/users/" + user_id + "/campaigns";
     var auth = userFactory.getAuthToken();
     var config = {
@@ -87,6 +91,21 @@ angular.module('loqalusClientApp').factory('newActionPage', ['$http', 'userFacto
     type = null;
   }
 
+  function setInHouse(inHouseType)
+  {    
+    if (inHouseType === 'sourced'){
+      inHouse = false;
+    }
+    if (inHouseType === 'inHouse'){
+      inHouse = true;
+    }
+
+  }
+
+  function getInHouse(){
+    return inHouse;
+  }
+
   return {
     createEvent: createEvent,
     createConversation: createConversation,
@@ -95,6 +114,8 @@ angular.module('loqalusClientApp').factory('newActionPage', ['$http', 'userFacto
     getType: getType,
     clean: clean,
     setLatLng: setLatLng,
-    getLatLng: getLatLng
+    getLatLng: getLatLng,
+    setInHouse: setInHouse,
+    getInHouse: getInHouse
   };
 }]);

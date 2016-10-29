@@ -9,13 +9,17 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link href="styles/animate.min.css" rel="stylesheet">
+    <link href="styles/prettyPhoto.css" rel="stylesheet">
+    <link href="styles/responsive.css" rel="stylesheet">
     <!-- endbuild -->
+    <link 
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+  rel="stylesheet"  type='text/css'>
   </head>
   <main ng-app="loqalusClientApp">
     <!--[if lte IE 8]>
@@ -49,17 +53,54 @@
               <li><a ng-show="{{nav.isLoggedIn}}" class="ng-cloak" ng-click="nav.signOut()">Sign Out</a></li>
             </ul>
           </div>
-
-
-        
         </div>
       </div>
     </div>
 
-    <div class="container-fluid">
+<!-- <div class="navbar-wrapper">
+  <div class="container">
+    <div class="navbar navbar-inverse navbar-static-top">
+      
+        <div class="navbar-header">
+      <a class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="navbar-brand" href="#/"><img src="images/loqalus.png" alt="Loqalus" style="max-height:35px;"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/#/campaigns">Campaigns</a></li>
+            <li><a ng-href="/#/conversations">Conversations</a></li>
+            <li><a ng-href="/#/events">Events</a></li>
+            <li><a ng-show="{{nav.isLoggedIn}}" class="ng-cloak" href="/#/profile">Your Profile</a></li>
+            <li><a ng-hide="{{nav.isLoggedIn}}" class="ng-cloak" ng-click="nav.openSignUpModal()">Sign In</a></li>
+            <li><a ng-hide="{{nav.isLoggedIn}}" class="ng-cloak" ng-click="nav.openRegisterModal()">Sign Up</a></li>
+            <li><a ng-show="{{nav.isLoggedIn}}" class="ng-cloak" ng-click="nav.signOut()">Sign Out</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+    </div>
+  </div><!-- /container -->
+<!-- </div> -->
+<!-- /navbar wrapper -->
+
+    <div>
     <div ng-view=""> </div>
     </div>
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyAxbb37Xa3uRzWuAwzfUzFIUCIaD3DjLBs&libraries=drawing"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyAxbb37Xa3uRzWuAwzfUzFIUCIaD3DjLBs&libraries=drawing"></script>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -78,6 +119,7 @@
     <!-- endbuild -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/factories/urlFactory.js"></script>
         <script src="scripts/factories/geolocator.js"></script>
         <script src="scripts/factories/mapService.js"></script>
         <script src="scripts/factories/userFactory.js"></script>
@@ -92,23 +134,25 @@
         <script src="scripts/controllers/createCampModal.js"></script>
         <script src="scripts/controllers/createEventModal.js"></script>
         <script src="scripts/controllers/modalOneController.js"></script>
+        <script src="scripts/controllers/modalInhouseCtrl.js"></script>
         <script src="scripts/controllers/modalTwoController.js"></script>
+        <script src="scripts/controllers/editActionCtrl.js"></script>
         <script src="scripts/controllers/eventCtrl.js"></script>
         <script src="scripts/controllers/conversationCtrl.js"></script>
         <script src="scripts/controllers/signInAndModalCtrl.js"></script>
         <script src="scripts/controllers/navController.js"></script>
+        <script src="scripts/controllers/editProfileCtrl.js"></script>
         <script src="scripts/controllers/profileController.js"></script>
         <!-- endbuild -->
 
 </main>
-
-    <footer class="footer-distributed">
+    <footer class="footer-distributed navbar-fixed-bottom">
 
       <div class="footer-right">
 
-        <a href="https://www.facebook.com/Loqalus-1623889444524658" target="_blank"><i class="fa fa-facebook"></i></a>
-        <a href="https://twitter.com/loqalus_chicago" target="_blank"><i class="fa fa-twitter"></i></a>
-        <a href="https://www.linkedin.com/company/loqalus" target="_blank"><i class="fa fa-linkedin"></i></a>
+        <a href="https://www.facebook.com/Loqalus-1623889444524658" target="_blank"><i class="  fa fa-facebook-square"></i></a>
+        <a href="https://twitter.com/loqalus_chicago" target="_blank"><i class="fa fa-twitter-square"></i></a>
+        <a href="https://www.youtube.com/watch?v=UCw_LexErxQ" target="_blank"><i class="fa fa-youtube-play"></i></a>
 
       </div>
 
@@ -117,16 +161,16 @@
         <p class="footer-links">
           <a href="#">Home</a>
           ·
-          <a href="#">Campaigns</a>
+          <a href="#/campaigns">Campaigns</a>
           ·
-          <a href="#">Conversations</a>
+          <a href="#/conversations">Conversations</a>
           ·
-          <a href="#">Events</a>
-          ·
-          <a href="#">About Us</a>
-        </p>
+          <a href="#/events">Events</a>
+          <!-- · -->
+<!--           <a href="#">About Us</a>
+ -->        </p>
 
-        <p>Loqalus &copy; 2015</p>
+        <p>Loqalus &copy; 2016</p>
       </div>
 
     </footer>
