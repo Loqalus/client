@@ -18,6 +18,7 @@ angular.module('loqalusClientApp')
   vm.active = 0;
   var slides = vm.slides = [];
   var currIndex = 0;
+  vm.images = [];
 
   var baseUrl = urlFactory.getBaseUrl();
 
@@ -26,6 +27,7 @@ angular.module('loqalusClientApp')
       $http.get(url).then(function(response){ 
         vm.allConversations = response.data.conversations;
         console.log(response.data)
+        vm.setImages();
       });
     };
 
@@ -38,13 +40,32 @@ angular.module('loqalusClientApp')
       vm.style = "z-depth-3";
     }
 
+  vm.addImages = function() {
+    var newWidth = 600 + slides.length + 1;
+    for(var i = 1; i < 7; i++){
+    vm.images.push({
+      image: 'images/small' + i + '.jpg',
+      text: ['Nice image','Awesome photograph','That is so cool','I love that'][slides.length % 4],
+      id: i
+    });
+  }
+  };
 
+  vm.setImages = function(){
+
+    for(var i = 0; i < vm.allConversations.length; i ++ ){
+      var num = Math.floor(Math.random() * (7 - 1)) + 1;
+
+      vm.allConversations[i].tempImage =  'images/small' + num + '.jpg';
+    }
+    console.log(vm.allConversations);
+  }
 
   vm.addSlides = function() {
     var newWidth = 600 + slides.length + 1;
-    for(var i = 1; i < 6; i++){
+    for(var i = 1; i < 2; i++){
     slides.push({
-      image: 'images/large' + (i) + '.jpg',
+      image: 'images/large' + 4 + '.jpg',
       text: ['Nice image','Awesome photograph','That is so cool','I love that'][slides.length % 4],
       id: i
     });
@@ -58,6 +79,7 @@ angular.module('loqalusClientApp')
 
 
     vm.addSlides();
+    vm.addImages();
 
   // Randomize logic below
 

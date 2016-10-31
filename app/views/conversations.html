@@ -4,7 +4,7 @@
 
         <img class="carroImg" ng-src="{{slide.image}}" style="margin:auto;">
         <div class="carousel-caption">
-          <h4>Slide {{vm.slide.id}}</h4>
+          <h4>{{vm.slide.id}}</h4>
           <p>{{vm.slide.text}}</p>
         </div>
       </div>
@@ -16,7 +16,7 @@
 <div ng-repeat="convo in vm.allConversations" ng-if="$index % 3 == 0" class="row">
     <div class="col-md-4">
       <div class="padme text-center material-card">
-      <img class="img-circle" src="http://placehold.it/140x140">
+      <img class="img-responsive" ng-src="{{vm.allConversations[$index].tempImage}}">
       <h2>{{vm.allConversations[$index].title}}</h2>
       <p>{{ vm.allConversations[$index].description | limitTo: 140 }}{{vm.allConversations[$index].description  > 140 ? '...' : ''}}</p>
       <p><a ng-show="vm.allConversations[$index].in_house" class="btn btn-default" ng-href="#/conversation/{{vm.allConversations[$index].id}}">Learn more »</a>
@@ -26,7 +26,7 @@
     </div>
     <div class="col-md-4" ng-if="vm.allConversations.length > ($index + 1)">
       <div class="padme text-center material-card">
-      <img class="img-circle" src="http://placehold.it/140x140">
+      <img class="img-responsive" ng-src="{{vm.allConversations[$index+1].tempImage}}">
       <h2>{{vm.allConversations[$index+1].title}}</h2>
       <p>{{ vm.allConversations[$index+1].description | limitTo: 140 }}{{vm.allConversations[$index+1].description  > 140 ? '...' : ''}}</p>
       <p><a ng-show="vm.allConversations[$index + 1].in_house" class="btn btn-default" ng-href="#/conversation/{{vm.allConversations[$index+1].id}}">Learn more »</a>
@@ -37,7 +37,7 @@
     </div>
     <div class="col-md-4" ng-if="vm.allConversations.length > ($index + 2)">
        <div class="padme text-center material-card">
-      <img class="img-circle" src="http://placehold.it/140x140">
+      <img class="img-responsive" ng-src="{{vm.allConversations[$index+2].tempImage}}">
       <h2>{{vm.allConversations[$index+2].title}}</h2>
       <p>{{ vm.allConversations[$index+2].description | limitTo: 140 }}{{vm.allConversations[$index+2].description  > 140 ? '...' : ''}}</p>
       <p><a ng-show="vm.allConversations[$index + 2].in_house" class="btn btn-default" ng-href="#/conversation/{{vm.allConversations[$index+2].id}}">Learn more »</a>
