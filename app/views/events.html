@@ -1,51 +1,16 @@
-<div style="height: 420px;">
-    <div uib-carousel active="active" interval="vm.myInterval">
-      <div uib-slide ng-repeat="slide in vm.slides track by slide.id" index="$index">
 
-        <img class="carroImg" ng-src="{{slide.image}}" style="margin:auto;">
-        <div class="carousel-caption">
-          <h4>Slide {{vm.slide.id}}</h4>
-          <p>{{vm.slide.text}}</p>
-        </div>
-      </div>
+
+<div  ng-repeat="event in vm.allEvents">
+  <div class="jumbotron">
+
+    <div class="container-fluid">
+      <h1>{{event.title}}</h1>
+
+      <p>{{event.description}}</p>
+
+  <p><a ng-show="{{event.in_house}}" ng-href="#/event/{{event.id}}" class="btn btn-success btn-lg">Learn more</a>
+  <a target="_blank" ng-hide="{{event.in_house}}" ng-href="{{event.link}}" class="btn btn-success btn-lg">Go to external link</a>
+  </p>
     </div>
+   </div>
 </div>
-<!-- /.carousel -->
-
-
-<div ng-repeat="event in vm.allEvents" ng-if="$index % 3 == 0" class="row">
-    <div class="col-md-4">
-      <div class="padme text-center material-card">
-      <img class="img-circle" src="http://placehold.it/140x140">
-      <h2>{{vm.allEvents[$index].title}}</h2>
-      <p>{{ vm.allEvents[$index].description | limitTo: 140 }}{{vm.allEvents[$index].description.length  > 140 ? '&hellip;' : ''}}</p>
-      <p><a ng-show="vm.allEvents[$index].in_house" class="btn btn-default" ng-href="#/event/{{vm.allEvents[$index].id}}">Learn more »</a>
-         <a target="_blank" target="_blank" ng-hide="vm.allEvents[$index].in_house" class="btn btn-default" ng-href="{{vm.allEvents[$index].link}}">Go to external site »</a>
-      </p>
-    </div>
-    </div>
-    <div class="col-md-4" ng-if="vm.allEvents.length > ($index + 1)">
-      <div class="padme text-center material-card">
-      <img class="img-circle" src="http://placehold.it/140x140">
-      <h2>{{vm.allEvents[$index+1].title}}</h2>
-      <p>{{ vm.allEvents[$index+1].description | limitTo: 140 }}{{vm.allEvents[$index+1].description.length  > 140 ? '&hellip;' : ''}}</p>
-      <p><a ng-show="vm.allEvents[$index + 1].in_house" class="btn btn-default" ng-href="#/event/{{vm.allEvents[$index+1].id}}">Learn more »</a>
-         <a target="_blank" ng-hide="vm.allEvents[$index + 1].in_house" class="btn btn-default" ng-href="{{vm.allEvents[$index+1].link}}">Go to external site »</a>
-      </p>
-      </div>
-
-    </div>
-    <div class="col-md-4" ng-if="vm.allEvents.length > ($index + 2)">
-       <div class="padme text-center material-card">
-      <img class="img-circle" src="http://placehold.it/140x140">
-      <h2>{{vm.allEvents[$index+2].title}}</h2>
-      <p>{{ vm.allEvents[$index+2].description | limitTo: 140 }}{{vm.allEvents[$index+2].description.length  > 140 ? '&hellip;' : ''}}</p>
-      <p><a ng-show="vm.allEvents[$index + 2].in_house" class="btn btn-default" ng-href="#/event/{{vm.allEvents[$index+2].id}}">Learn more »</a>
-         <a target="_blank" ng-hide="vm.allEvents[$index + 2].in_house" class="btn btn-default" ng-href="{{vm.allEvents[$index+2].link}}">Go to external site »</a>
-      </p>
-      </div>
-    </div>
-
-
-</div>
-
