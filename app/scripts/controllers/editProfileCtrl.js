@@ -15,13 +15,13 @@ angular.module('loqalusClientApp')
     vm.allInterests = [];
     vm.interest = '';
 
-  	var setupProfile = function(){
+    var setupProfile = function(){
       var url = baseUrl + "/api/users/" + $window.localStorage.getItem('user_id');
-  		$http.get(url).then(function(response){ 
-				vm.user = response.data.user;
-				vm.interests = response.data.interests;
-  		});
-  	};
+      $http.get(url).then(function(response){ 
+        vm.user = response.data.user;
+        vm.interests = response.data.interests;
+      });
+    };
 
     vm.loadTags = function(){
       var url = baseUrl+ "api/tag";
@@ -109,7 +109,7 @@ angular.module('loqalusClientApp')
     }
 
 
-  	setupProfile();
+    setupProfile();
     vm.loadTags();
 
 }]);

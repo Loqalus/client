@@ -1,4 +1,4 @@
-<div  ng-repeat="camp in vm.allCampaigns">
+<!-- <div  ng-repeat="camp in vm.allCampaigns">
 <div class="jumbotron">
 
 
@@ -10,4 +10,55 @@
 	<a target="_blank" ng-hide="{{camp.in_house}}" ng-href="{{camp.link}}" class="btn btn-success btn-lg">Learn more</a>
   </p>
 </div>
+ -->
 
+<div style="height: 420px">
+    <div uib-carousel active="active" interval="vm.myInterval">
+      <div uib-slide ng-repeat="slide in vm.slides track by slide.id" index="$index">
+
+        <img class="carroImg" ng-src="{{slide.image}}" style="margin:auto;">
+        <div class="carousel-caption">
+          <h4>Slide {{vm.slide.id}}</h4>
+          <p>{{vm.slide.text}}</p>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- /.carousel -->
+
+
+<div ng-repeat="camp in vm.allCampaigns" ng-if="$index % 3 == 0" class="row">
+    <div class="col-md-4">
+      <div class="padme text-center material-card">
+      <img class="img-circle" src="http://placehold.it/140x140">
+      <h2>{{vm.allCampaigns[$index].title}}</h2>
+      <p>{{ vm.allCampaigns[$index].description | limitTo: 140 }}{{vm.allCampaigns[$index].description.length  > 140 ? '...' : ''}}</p>
+      <p><a ng-show="vm.allCampaigns[$index].in_house" class="btn btn-default" ng-href="#/campaign/{{vm.allCampaigns[$index].id}}">Learn more »</a>
+         <a target="_blank" target="_blank" ng-hide="vm.allCampaigns[$index].in_house" class="btn btn-default" ng-href="{{vm.allCampaigns[$index].link}}">Go to external site »</a>
+      </p>
+    </div>
+    </div>
+    <div class="col-md-4" ng-if="vm.allCampaigns.length > ($index + 1)">
+      <div class="padme text-center material-card">
+      <img class="img-circle" src="http://placehold.it/140x140">
+      <h2>{{vm.allCampaigns[$index+1].title}}</h2>
+      <p>{{ vm.allCampaigns[$index+1].description | limitTo: 140 }}{{vm.allCampaigns[$index+1].description.length  > 140 ? '...' : ''}}</p>
+      <p><a ng-show="vm.allCampaigns[$index + 1].in_house" class="btn btn-default" ng-href="#/campaign/{{vm.allCampaigns[$index+1].id}}">Learn more »</a>
+         <a target="_blank" ng-hide="vm.allCampaigns[$index + 1].in_house" class="btn btn-default" ng-href="{{vm.allCampaigns[$index+1].link}}">Go to external site »</a>
+      </p>
+      </div>
+
+    </div>
+    <div class="col-md-4" ng-if="vm.allCampaigns.length > ($index + 2)">
+       <div class="padme text-center material-card">
+      <img class="img-circle" src="http://placehold.it/140x140">
+      <h2>{{vm.allCampaigns[$index+2].title}}</h2>
+      <p>{{ vm.allCampaigns[$index+2].description | limitTo: 140 }}{{vm.allCampaigns[$index+2].description.length  > 140 ? '...' : ''}}</p>
+      <p><a ng-show="vm.allCampaigns[$index + 2].in_house" class="btn btn-default" ng-href="#/campaign/{{vm.allCampaigns[$index+2].id}}">Learn more »</a>
+         <a target="_blank" ng-hide="vm.allCampaigns[$index + 2].in_house" class="btn btn-default" ng-href="{{vm.allCampaigns[$index+2].link}}">Go to external site »</a>
+      </p>
+      </div>
+    </div>
+
+
+</div>

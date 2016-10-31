@@ -1,15 +1,50 @@
-<div  ng-repeat="convo in vm.allConversations">
-	<div class="jumbotron">
+<div style="height: 420px">
+    <div uib-carousel active="active" interval="vm.myInterval">
+      <div uib-slide ng-repeat="slide in vm.slides track by slide.id" index="$index">
 
-		<div class="container-fluid">
-		  <h1>{{convo.title}}</h1>
-
-		  <p>{{convo.description}}</p>
-
-		  <p><a ng-show="{{convo.in_house}}" ng-href="#/conversation/{{convo.id}}" class="btn btn-success btn-lg">Learn more</a>
-			<a target="_blank" ng-hide="{{convo.in_house}}" ng-href="{{convo.link}}" class="btn btn-success btn-lg">Learn more</a>
-		  </p>
-		</div>
-	 </div>
+        <img class="carroImg" ng-src="{{slide.image}}" style="margin:auto;">
+        <div class="carousel-caption">
+          <h4>Slide {{vm.slide.id}}</h4>
+          <p>{{vm.slide.text}}</p>
+        </div>
+      </div>
+    </div>
 </div>
+<!-- /.carousel -->
 
+
+<div ng-repeat="convo in vm.allConversations" ng-if="$index % 3 == 0" class="row">
+    <div class="col-md-4">
+      <div class="padme text-center material-card">
+      <img class="img-circle" src="http://placehold.it/140x140">
+      <h2>{{vm.allConversations[$index].title}}</h2>
+      <p>{{ vm.allConversations[$index].description | limitTo: 140 }}{{vm.allConversations[$index].description  > 140 ? '...' : ''}}</p>
+      <p><a ng-show="vm.allConversations[$index].in_house" class="btn btn-default" ng-href="#/conversation/{{vm.allConversations[$index].id}}">Learn more »</a>
+         <a target="_blank" target="_blank" ng-hide="vm.allConversations[$index].in_house" class="btn btn-default" ng-href="{{vm.allConversations[$index].link}}">Go to external site »</a>
+      </p>
+    </div>
+    </div>
+    <div class="col-md-4" ng-if="vm.allConversations.length > ($index + 1)">
+      <div class="padme text-center material-card">
+      <img class="img-circle" src="http://placehold.it/140x140">
+      <h2>{{vm.allConversations[$index+1].title}}</h2>
+      <p>{{ vm.allConversations[$index+1].description | limitTo: 140 }}{{vm.allConversations[$index+1].description  > 140 ? '...' : ''}}</p>
+      <p><a ng-show="vm.allConversations[$index + 1].in_house" class="btn btn-default" ng-href="#/conversation/{{vm.allConversations[$index+1].id}}">Learn more »</a>
+         <a target="_blank" ng-hide="vm.allConversations[$index + 1].in_house" class="btn btn-default" ng-href="{{vm.allConversations[$index+1].link}}">Go to external site »</a>
+      </p>
+      </div>
+
+    </div>
+    <div class="col-md-4" ng-if="vm.allConversations.length > ($index + 2)">
+       <div class="padme text-center material-card">
+      <img class="img-circle" src="http://placehold.it/140x140">
+      <h2>{{vm.allConversations[$index+2].title}}</h2>
+      <p>{{ vm.allConversations[$index+2].description | limitTo: 140 }}{{vm.allConversations[$index+2].description  > 140 ? '...' : ''}}</p>
+      <p><a ng-show="vm.allConversations[$index + 2].in_house" class="btn btn-default" ng-href="#/conversation/{{vm.allConversations[$index+2].id}}">Learn more »</a>
+         <a target="_blank" ng-hide="vm.allConversations[$index + 2].in_house" class="btn btn-default" ng-href="{{vm.allConversations[$index+2].link}}">Go to external site »</a>
+      </p>
+      </div>
+    </div>
+
+
+</div>

@@ -9,48 +9,103 @@
  */
 angular.module('loqalusClientApp')
   .controller('MainCtrl',  ['$scope', 'NgMap', 'geolocationSvc' , 'mapService', '$uibModal', 'templateFactory', 'newActionPage', '$window', '$rootScope', function ($scope, NgMap, geolocationSvc, mapService, $uibModal, templateFactory, newActionPage, $window, $rootScope) {
-  	var main = this;
-  	main.zoom = 15;
+    var main = this;
+    var initialZoom = 0;
+    var markers = markers || [];
+    main.zoom = 15;
     var modalInstance;
     var pins = [];
-    var dist = 3;
     var pinsColors = ["FE7569", "3399ff", "66ff66"]
     var baseImageUrl = "/images/pin";
+    var getPins = false;
+    var timeouts = [];
+    var notMoved = true;
 
     console.log("Grabbing location");
     var timeStart = new Date();
-  	geolocationSvc.getCurrentPosition().then(
-  	function(position){
-  			initMap(position);
+
+    geolocationSvc.getCurrentPosition().then(
+      function(position){
+        initMap(position);
         var timeEnd = new Date();
         var seconds = (timeEnd.getTime() - timeStart.getTime())/1000
         console.log("Getting the postition took " + seconds + " seconds");
-  		}
-  	);
+      }
+    );
+
+    function computeRadius(map){
+      var bounds = map.getBounds();
+
+      var center = bounds.getCenter();
+      var ne = bounds.getNorthEast();
+
+      // r = radius of the earth in statute miles
+      var r = 3963.0;  
+
+      // Convert lat or lng from decimal degrees into radians (divide by 57.2958)
+      var lat1 = center.lat() / 57.2958; 
+      var lon1 = center.lng() / 57.2958;
+      var lat2 = ne.lat() / 57.2958;
+      var lon2 = ne.lng() / 57.2958;
+
+      // distance = circle radius from center to Northeast corner of bounds
+      var dis = r * Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2 - lon1));
+      return dis;
+    }
 
     main.onMapOverlayCompleted = function(marker){
-        var lat = marker.overlay.position.lat();
-        var lng = marker.overlay.position.lng();
-        newActionPage.setLatLng(lat, lng);
-        var signedIn = true;
-        if(signedIn)
-        {
-           openModal();
-        }
-        else
-        {
-
-          getMustSignIn
-            alert("Please Create an Account Or Sign In");
-            marker.overlay.map = null;
-        }
+      var lat = marker.overlay.position.lat();
+      var lng = marker.overlay.position.lng();
+      newActionPage.setLatLng(lat, lng);
+      marker.overlay.setMap(null);
+      openModal(marker);
     }
 
     main.goToPage = function() {
       console.log('pin')
     }
+ 
+    main.dragStart =  function(){
+      console.log("Staring drag");
+      getPins = false;
+    }
 
-    function openModal(){
+    main.zoomChanged = function(){
+      // for (var i=0; i<timeouts.length; i++) {
+      //   $window.clearTimeout(timeouts[i]);
+      // }
+
+      // timeouts.push($window.setTimeout(function(){
+      //   console.log("get the pins!");
+      //   NgMap.getMap().then(function(map) {
+      //     var newDistance = computeRadius(map);
+      //     loadPins(map.center.lat(), map.center.lng(), newDistance, map);
+      //   });
+      // }, 1000));
+
+
+    }
+
+    main.dragEnd = function() {
+    // console.log("Ending drag");
+
+
+
+      for (var i=0; i<timeouts.length; i++) {
+        $window.clearTimeout(timeouts[i]);
+      }
+      notMoved = false;
+
+      timeouts.push($window.setTimeout(function(){
+        console.log("get the pins!");
+        NgMap.getMap().then(function(map) {
+          var newDistance = computeRadius(map);
+          loadPins(map.center.lat(), map.center.lng(), newDistance, map);
+        });
+      }, 1200));
+  }
+
+    function openModal(marker){
 
       if($window.localStorage.getItem('auth_token')){
           modalInstance = $uibModal.open({
@@ -69,24 +124,34 @@ angular.module('loqalusClientApp')
             bindToController: true,
             controllerAs: 'vm'
          });
+          marker.overlay.setMap(null);
+          console.log(marker);
         }
 
     }
 
-  	function initMap(position){
-	  	NgMap.getMap().then(function(map) {
+    function clearMarkers(){
+      console.log("Deleting markers");
+      console.log(markers);
 
-  	    main.lat = position.coords.latitude;
-  	    main.lng = position.coords.longitude;
-        var dist = 2.8;
+       for(var i = 0; i < markers.length; i++){
+          markers[i].setMap(null); 
+       } 
+        markers = []; 
+    }
+
+    function loadPins(lat, lng, dist, map){
+        clearMarkers();
+        main.lat = lat;
+        main.lng = lng;
+        var dist = 1;
         var bounds = new google.maps.LatLngBounds();
         bounds.extend(new google.maps.LatLng(main.lat, main.lng));
-        console.log(position);
-        mapService.getPins(position.coords.latitude, position.coords.longitude, dist).success(function success(response){
+        mapService.getPins(lat, lng, dist).success(function success(response){
           pins = response.pins;
           var blurbs = []
           var counter = 0;
-          // console.log(pins);
+          console.log(pins);
           for(var i in pins)
           {
             (function(key){
@@ -108,6 +173,9 @@ angular.module('loqalusClientApp')
                 animation: google.maps.Animation.DROP,
                 icon: imageUrl
               });
+              markers.push(marker);
+
+// "{{" + pins[key].description + "| limitTo: 140 }}{{"+  pins[key].description.length +  "> 140 ? '...' : ''}}"
 
              var  content = document.createElement('div'), button;
              content.innerHTML='<h2 class="firstHeading">'+ title + '</h2> <br>'+
@@ -127,6 +195,7 @@ angular.module('loqalusClientApp')
                     type = '/#/campaign/'
                   if (pins[key].action_type === 2)
                     type = '/#/conversation/'
+
                   $window.location.href = type + pins[key].id
                 })
               }
@@ -135,7 +204,6 @@ angular.module('loqalusClientApp')
                 button=content.appendChild(document.createElement('a'));
                 button.innerHTML='Go to external link';
                 button.href=pins[key].link;
-                console.log(pins[key].link);
                 button.target='_blank';
               }
 
@@ -157,12 +225,21 @@ angular.module('loqalusClientApp')
             });
           })(i);
         }
-        if(pins.length>0){
+        if(pins.length>0 && notMoved){
          map.fitBounds(bounds);
         }
         }).error(function error(response){
           console.log("Some error occured while getting pins.")
         });
+    }
+
+    function initMap(position){
+
+      NgMap.getMap().then(function(map) {
+        var lat = position.coords.latitude;
+        var lng = position.coords.longitude;
+        var dist = 0.2;
+        loadPins(lat, lng, dist, map);
     });
   }
 }]);

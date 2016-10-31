@@ -1,176 +1,87 @@
-<!-- 
-<img class="conversation" src="http://14544-presscdn-0-64.pagely.netdna-cdn.com/wp-content/uploads/2014/05/Norfolk-Southern-Chicago.jpg" alt="" />
-   <link rel="stylesheet" href="app/styles/conversation.css">
-		<div class="conversation">
-		  <p class="header">{{conversationCtrl.convo.title}}</p>
-		<div>
-  
-		<article class="flex-convo">
-		    <div id="tags">This is going to be where the map and everything of that sort is at</div> 
-		    <div id="conversations">{{conversationCtrl.convo.description}}</div>
-				<div id="contributors">
-					Thing you do
-				</div>
-		</article>
-  <div>
-    <textarea ng-model="conversationCtrl.newComment" placholder="Add a comment"></textarea>
-    <button class="btn btn-success" type="button" ng-disabled="conversationCtrl.disablePostComment()" ng-click="conversationCtrl.addComment()">Post</button>  <button class="btn btn-success" ng-click="conversationCtrl.cancelComment()">Cancel</button>
-  </div>
-    <section class="flex-comments">
-      <div id="comments">
-        <div ng-repeat="item in conversationCtrl.comments">
-          <div> <h3>{{item.user.name}}</h3>
-            {{item.comment}}
-          </div>
+
+    <section id="blog" class="container">
+        <div class="center">
+            <h2>Conversation</h2>
+            <p class="lead">{{conversationCtrl.convo.title}}</p>
         </div>
-      </div>  
-    </section> 
 
- -->
-
-<!-- <link rel="stylesheet" href="app/styles/conversation.css"> -->
-<style>
-body {
-  font-family: helvetica, garamond;
-}
-
-h1 {
-  color: white;
-  position: relative;
-  background: black;
-  height: 90px;
-  font-size: 300%;
-  padding-top: 15px;
-  padding-left: 15px;
-}
-
-h1:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: -9999px;
-    right: 0;
-    border-left: 9999px black;
-    box-shadow: 9999px 0 0 black;
-}
-
-.specifics, .description {
-  margin: 0 auto;
-  position: relative;
-  border-radius: 12px;
-  padding: 30px;
-  max-width: 80%;
-  z-index: 0;
-}
-
-.description {
-  background: #fff9f2;
-}
+        <div class="blog">
+            <div class="row">
+  <a ng-show="conversationCtrl.isOwner"><button type="button" ng-click = "conversationCtrl.editAction()" class="btn btn-danger btn-lg">Edit</button></a>
+  <a ng-show="conversationCtrl.isOwner"><button type="button" ng-click = "conversationCtrl.deleteAction()" class="btn btn-danger btn-lg">Delete Event</button></a>
+                 <div class="col-md-8">
+                    <div class="blog-item">
+                        <div class="row">
+                                
+                            <div class="col-xs-12 col-sm-10 blog-content">
+                                <a href="#"><img class="img-responsive img-blog" src="images/backdrop0.jpg" width="100%" alt="" /></a>
+                                <h2><a>{{conversationCtrl.convo.title}}</a></h2>
+                                <h3>{{conversationCtrl.convo.description}}</h3>
+                            </div>
+                        </div>    
+                    </div><!--/.blog-item-->
+                </div><!--/.col-md-8-->
 
 
-.convo-details {
-  align: center;
-  position: absolute;
-  padding-left: 20px;
-  margin-top: -25px;
-  margin-bottom: 50px;
-  z-index: 2;
-}
+                <aside class="col-md-4">
+                    <div class="widget tags">
+                        <h3>Tags</h3>
+                        <ul class="tag-cloud">
+                            <li ng-repeat="tag in conversationCtrl.tags"><a class="btn btn-xs btn-primary" >{{tag}}</a></li>
+                            <p ng-if="conversationCtrl.tags.length == 0" class="text-muted">This Event has no Tags</p>
+                        </ul>
 
-#convo-info, #convo-description, #convo-tags {
-  margin: 0 auto;
-  background: #fff9f2;
-  position: relative;
-  border-radius: 12px;
-  padding: 30px;
-  max-width: 80%;
-  z-index: 1;
-}
+                    </div><!--/.tags-->
+                    <div class="widget categories">
+                        <h3>Created By</h3>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="single_comments">
+                    <img src="images/avatar3.png" alt=""  />
+                    <p>{{conversationCtrl.Owner.bio}}</p>
+                                    <div class="entry-meta small muted">
+                                        <span>By <a ng-href="/#/profile/{{conversationCtrl.Owner.id}}">{{conversationCtrl.Owner.name}}</a></span>
+                                    </div>
+                  </div>
+                            </div>
+                        </div>                     
+                    </div><!--/.recent comments-->
+              </aside>  
+                  </div>
+                        <h1 id="comments_title">{{conversationCtrl.comments.length}} Comments</h1>
+                      <div ng-repeat="comment in conversationCtrl.comments">
+                        <div class="media comment_section">
+                            <div class="media-body post_reply_comments">
+                                <h3>{{comment.user.name}}</h3>
+                                <h4>{{conversationCtrl.dates[$index] | date: 'medium'}}</h4>
+                                <p>{{comment.comment}}</p>
+                                <a ng-if="conversationCtrl.isOwner || conversationCtrl.createdThisComment($index)" href="" ng-click="conversationCtrl.deleteComment($index)" >Delete</a>
+                            </div>
+                        </div>
+                      </div>
+                        <div id="contact-page clearfix">
+                            <div class="status alert alert-success" style="display: none"></div>
+                            <div class="message_heading">
+                                <h4>Leave a Comment</h4>
+                            </div> 
+      
+                            <form class="contact-form" name="contact-form" role="form">
+                                <div class="row">
+                                    <div class="col-sm-7">                        
+                                        <div class="form-group">
+                                            <label>Message *</label>
+                                            <textarea name="message" ng-model="conversationCtrl.newComment" required="required" class="form-control" rows="8"></textarea>
+                                        </div>                        
+                                        <div class="form-group">
+                                            <button type="button" ng-disabled="conversationCtrl.disablePostComment()" ng-click="conversationCtrl.addComment()" class="btn btn-success btn-lg" required="required">Submit Message</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>     
+                        </div><!--/#contact-page-->
+    </section>
 
-#convo-description, #convo-tags {
-  display: none;
-}
-
-
-.comments {
-  margin: 20px auto;
-  background: #f7f7f7;
-  position: relative;
-  border-radius: 12px;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  max-width: 80%;
-  text-align: center;
-  z-index: 1;
-}
-
-
-</style>
-
-<div class="convo-header">
-  <h1>{{conversationCtrl.convo.title}}</h1>
-</div>
-<div class="convo-details">
-  <a class="info"><button type="button" class="btn btn-danger btn-lg">Details</button></a>
-  <a class="tags"><button type="button" class="btn btn-danger btn-lg">Tags</button></a>
-      <a ng-show="conversationCtrl.isOwner"><button type="button" ng-click = "conversationCtrl.editAction()" class="btn btn-danger btn-lg">Edit</button></a>
-  <a ng-show="conversationCtrl.isOwner"><button type="button" ng-click = "conversationCtrl.deleteAction()" class="btn btn-danger btn-lg">Delete Conversation</button></a>
-</div>
-
-<div class="row">
-  <div class="center" id="convo-info">
-    <h2>{{conversationCtrl.convi.title}}</h2>
-    <h2>Description</h2>
-    <p>{{conversationCtrl.convo.description}}</p>
-
-  </div>
-
-  <div class="center" id="convo-tags">
-    <h2>Tags</h2> 
-    <div ng-repeat="tag in conversationCtrl.tags">
-          <a href='javascript:' class="btn btn-info" role="button">{{tag}}</a>
-    </div>
-  </div>
-
-</div>
+                    </div><!--/.col-md-8-->
+            </div><!--/.row-->
 
 
-<div class="comments">
-  <div>  
-    <textarea ng-model="conversationCtrl.newComment" placholder="Add a comment"></textarea>
-    <button class="btn btn-success" type="button" ng-disabled="conversationCtrl.disablePostComment()" ng-click="conversationCtrl.addComment()">Post</button>  <button class="btn btn-success" ng-click="conversationCtrl.cancelComment()">Cancel</button>
-  </div>
-    <section class="flex-comments">
-      <div id="comments">
-        <div ng-repeat="item in conversationCtrl.comments">
-          <div> <h3>{{item.user.name}}</h3>
-            {{item.comment}}
-          </div>
-        </div>
-      </div>  
-    </section> 
-
-</div>
-
-
-<script>
-  $(document).ready(function(){
-    $('body').on('click', ".info", function(){
-        $("#convo-info").slideToggle();
-    });
-});
-
-$(document).ready(function(){
-    $('body').on('click', ".tags", function(){
-        $("#convo-tags").slideToggle();
-    });
-});
-
-
-// $(document).ready(function(){
-//     $('body').on('click', ".description", function(){
-//         $("#convo-description").slideToggle();
-//     });
-// });
-</script>

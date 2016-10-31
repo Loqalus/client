@@ -7,7 +7,7 @@
  * # CrtEventMdlCtrl
  * Controller of the loqalusClientApp
  */
-angular.module('loqalusClientApp').controller('CrtEventMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', '$http', 'urlFactory', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window, $http, urlFactory) {
+angular.module('loqalusClientApp').controller('CrtEventMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', '$http', 'urlFactory', 'templateFactory', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window, $http, urlFactory, templateFactory) {
 
   var vm = this;
   vm.inHouse = newActionPage.getInHouse();;
@@ -77,7 +77,22 @@ angular.module('loqalusClientApp').controller('CrtEventMdlCtrl', ['$scope', 'new
     newActionPage.createEvent(vm.newEvent)
     .success(function (data, status, headers, config) {
       vm.close();
-      $window.location.href = "/#/event/" + data.message.id;
+      if(vm.newEvent.in_house){
+        $window.location.href = "/#/event/" + data.message.id;
+      }else{
+
+        $window.setTimeout(function(){
+            var modalInstance = $uibModal.open({
+            template: templateFactory.getPromotedEventSuccess(),
+            size: 'md',
+            controller: 'modalOneCtrl',
+            bindToController: true,
+            controllerAs: 'vm'
+         });
+          }, 1000);
+
+      }
+      
       console.log("success");
     })
     .error(function (data, status, header, config) {

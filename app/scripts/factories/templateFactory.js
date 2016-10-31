@@ -604,6 +604,38 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
           `
     }
 
+  function getPromotedEventSuccess(){
+    return `<div class="modal-content">
+              <div class="modal-header">
+               <span>Promoted Event created!</span> <button type="button" ng-click="vm.close()" class="close">&times;</button>
+             </div>
+                <div class="modal-body" style="padding:40px 50px;">
+
+                </div>
+
+               <div class="modal-footer">
+                  <button type="submit" ng-click="vm.close()" class="btn btn-success btn-block" ></span> Ok</button>
+               </div>
+          </div>
+          `
+  }
+
+  function getPromotedConvoSuccess(){
+    return `<div class="modal-content">
+              <div class="modal-header">
+               <span>Promoted Conversation created!</span> <button type="button" ng-click="vm.close()" class="close">&times;</button>
+             </div>
+                <div class="modal-body" style="padding:40px 50px;">
+
+                </div>
+
+               <div class="modal-footer">
+                  <button type="submit" ng-click="vm.close()" class="btn btn-success btn-block" ></span> Ok</button>
+               </div>
+          </div>
+          `
+  }
+
   return {
   	getCreatePinsOne: getCreatePinsOne,
     getConversationModal: getConversationModal,
@@ -619,7 +651,9 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
     getMustSignIn: getMustSignIn,
     getEditConvoModal: getEditConvoModal,
     getEditEventModal: getEditEventModal,
-    getDeleteCommentModal: getDeleteCommentModal
+    getDeleteCommentModal: getDeleteCommentModal,
+    getPromotedConvoSuccess: getPromotedConvoSuccess,
+    getPromotedEventSuccess: getPromotedEventSuccess
   };
 
 });

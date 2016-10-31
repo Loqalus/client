@@ -27,7 +27,7 @@
                     <div class="widget tags">
                         <h3>Tags</h3>
                         <ul class="tag-cloud">
-                            <li ng-repeat="tag in eventCtrl.tags"><a class="btn btn-xs btn-primary" href="#">{{tag}}</a></li>
+                            <li ng-repeat="tag in eventCtrl.tags"><a class="btn btn-xs btn-primary" >{{tag}}</a></li>
                             <p ng-if="eventCtrl.tags.length == 0" class="text-muted">This Event has no Tags</p>
                         </ul>
 
@@ -40,7 +40,7 @@
                     <img src="images/avatar3.png" alt=""  />
                     <p>{{eventCtrl.Owner.bio}}</p>
                                     <div class="entry-meta small muted">
-                                        <span>By <a >{{eventCtrl.Owner.name}}</a></span>
+                                        <span>By <a ng-href="/#/profile/{{eventCtrl.Owner.id}}">{{eventCtrl.Owner.name}}</a></span>
                                     </div>
                   </div>
                             </div>

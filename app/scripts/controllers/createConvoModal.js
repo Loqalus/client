@@ -7,7 +7,7 @@
  * # CrtConvoMdlCtrl
  * Controller of the loqalusClientApp
  */
-angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', '$http', 'urlFactory',function ($scope, newActionPage, $uibModalInstance, $uibModal, $window, $http, urlFactory) {
+angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', '$http', 'urlFactory', 'templateFactory',function ($scope, newActionPage, $uibModalInstance, $uibModal, $window, $http, urlFactory, templateFactory) {
 
   var vm = this;
   vm.inHouse = newActionPage.getInHouse();;
@@ -71,7 +71,19 @@ angular.module('loqalusClientApp').controller('CrtConvoMdlCtrl', ['$scope', 'new
     newActionPage.createConversation(vm.convo)
     .success(function (data, status, headers, config) {
       vm.close();
-      $window.location.href = "/#/conversation/" + data.message.id;
+      if(vm.convo.in_house){
+        $window.location.href = "/#/conversation/" + data.message.id;
+      }else{
+        $window.setTimeout(function(){
+            var modalInstance = $uibModal.open({
+            template: templateFactory.getPromotedConvoSuccess(),
+            size: 'md',
+            controller: 'modalOneCtrl',
+            bindToController: true,
+            controllerAs: 'vm'
+         });
+          }, 1000);
+      }
       console.log("success");
     })
     .error(function (data, status, header, config) {

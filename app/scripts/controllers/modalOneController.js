@@ -9,62 +9,62 @@
  */
 angular.module('loqalusClientApp')
   .controller('modalOneCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', 'templateFactory', function ($scope, newActionPage, $uibModalInstance, $uibModal, templateFactory) {
-	var vm = this;
-	vm.$onInit;
-	vm.test;
-	vm.close;
-	vm.setType;
-	vm.eventClass = 'startanaction';
-	vm.campaignClass = 'startanaction';
-	vm.convoClass = 'startanaction';
+    var vm = this;
+    vm.$onInit;
+    vm.test;
+    vm.close;
+    vm.setType;
+    vm.eventClass = 'startanaction';
+    vm.campaignClass = 'startanaction';
+    vm.convoClass = 'startanaction';
 
-	vm.$onInit = function() {
-		newActionPage.clean();
- 	}
+    vm.$onInit = function() {
+        newActionPage.clean();
+    }
 
- 	vm.test = function(){
- 		console.log("bro");
- 	}
+    vm.test = function(){
+        console.log("bro");
+    }
 
- 	vm.close = function(){
- 		$uibModalInstance.close();
- 	}
+    vm.close = function(){
+        $uibModalInstance.close();
+    }
 
- 	function changeCss(type){
- 		if (type === 'Event'){
-	  	vm.eventClass = 'startanactionChosen';
-	  	vm.campaignClass = 'startanaction';
-	  	vm.convoClass = 'startanaction';
- 		}
- 		if (type === 'Conversation'){
-	  	vm.eventClass = 'startanaction';
-	  	vm.campaignClass = 'startanaction';
-	  	vm.convoClass = 'startanactionChosen';
- 		}
-  	if (type === 'Campaign'){
-	  	vm.eventClass = 'startanaction';
-	  	vm.campaignClass = 'startanactionChosen';
-	  	vm.convoClass = 'startanaction';
- 		}
- 	}
+    function changeCss(type){
+        if (type === 'Event'){
+        vm.eventClass = 'startanactionChosen';
+        vm.campaignClass = 'startanaction';
+        vm.convoClass = 'startanaction';
+        }
+        if (type === 'Conversation'){
+        vm.eventClass = 'startanaction';
+        vm.campaignClass = 'startanaction';
+        vm.convoClass = 'startanactionChosen';
+        }
+    if (type === 'Campaign'){
+        vm.eventClass = 'startanaction';
+        vm.campaignClass = 'startanactionChosen';
+        vm.convoClass = 'startanaction';
+        }
+    }
 
-	vm.setType = function(type) {
-		changeCss(type);
-		newActionPage.setType(type)
-	}
+    vm.setType = function(type) {
+        changeCss(type);
+        newActionPage.setType(type)
+    }
 
-	vm.disable = function(){
-		console.log(newActionPage.getType())
-		if(newActionPage.getType())
-			return false;
-		else
-			return true;
-	}
+    vm.disable = function(){
+        console.log(newActionPage.getType())
+        if(newActionPage.getType())
+            return false;
+        else
+            return true;
+    }
 
-	vm.next = function(){
-		$uibModalInstance.close();
-		openModal();
-	}
+    vm.next = function(){
+        $uibModalInstance.close();
+        openModal();
+    }
 
   function openModal(){
     var modal = templateFactory.getInHouseOrOutSrc();

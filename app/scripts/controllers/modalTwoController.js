@@ -9,9 +9,9 @@
  */
 angular.module('loqalusClientApp')
   .controller('modalTwoCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', function ($scope, newActionPage, $uibModalInstance, $uibModal) {
-  	var vm = this;
+    var vm = this;
     vm.inHouse = true;
-  	vm.$onInit;
+    vm.$onInit;
     vm.type;
     vm.close;
     vm.toggle;
@@ -29,9 +29,9 @@ angular.module('loqalusClientApp')
       console.log(vm.inHouse);
     }
 
-  	vm.$onInit = function(){
+    vm.$onInit = function(){
       vm.type = newActionPage.getType();
       console.log(newActionPage.getType());
-  	}
+    }
 
   }]);

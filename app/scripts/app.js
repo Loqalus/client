@@ -49,7 +49,7 @@ angular
       controller: 'campaignMasterlist',
       controllerAs: 'vm'
     })
-    .when('/profile', {
+    .when('/profile/:id', {
       templateUrl: 'views/profile.html',
       controller: 'profileCtrl',
       controllerAs: 'profileCtrl'

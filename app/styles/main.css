@@ -5,6 +5,7 @@
   padding: 0.2em 0;
 }
 
+
 .box {
     padding: 0 5px 0 5px;
 }
@@ -178,7 +179,7 @@ textarea#message{
 }
 
 .badge {
-  background-color: #c52d2f;
+   background-color: #c52d2f;
   border-radius: 5px;
   color: #fff;
   padding: 8px;
@@ -655,11 +656,11 @@ body {
   }
 
 .carroImg {
-/*    width: 100%;
-    height: auto;*/
-
-  height: auto;  
-  max-width: 100%;  
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  max-width: none;
 }
 
 box-shadow: [horizontal offset] [vertical offset] [blur radius] [optional spread radius] [color];
@@ -682,6 +683,9 @@ box-shadow: [horizontal offset] [vertical offset] [blur radius] [optional spread
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
+
+.carousel-control.left {background-image:none;}
+.carousel-control.right {background-image:none;}
 
 /* Carousel base class */
 .carousel {
@@ -905,7 +909,7 @@ button:hover {
 }
 
 .active{
-  background-color: #ff3333 !important;
+  /*background-color: #ff3333 !important;*/
   box-shadow: none !important;
   border:none !important;
 }

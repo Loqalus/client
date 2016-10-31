@@ -11,7 +11,7 @@ angular.module('loqalusClientApp')
   .controller('eventMasterlist', ['$window', '$http', 'urlFactory', function($window, $http, urlFactory){
     var vm = this;
     var baseUrl = urlFactory.getBaseUrl();
-  	vm.allEvents = [];
+    vm.allEvents = [];
     vm.style = "z-depth-3";
       vm.myInterval = 5000;
   vm.noWrapSlides = false;
@@ -19,13 +19,13 @@ angular.module('loqalusClientApp')
   var slides = vm.slides = [];
   var currIndex = 0;
 
-  	var setupEvents = function(){
+    var setupEvents = function(){
       var url = baseUrl + "api/events"
-  		$http.get(url).then(function(response){ 
-				vm.allEvents = response.data.events;
+      $http.get(url).then(function(response){ 
+        vm.allEvents = response.data.events;
         console.log(vm.allEvents);
-  		});
-  	};
+      });
+    };
 
     vm.enter = function(){
       vm.style = "z-depth-4";
@@ -87,7 +87,7 @@ angular.module('loqalusClientApp')
     return array;
   }
 
-		setupEvents();
+    setupEvents();
 
 
   }]);

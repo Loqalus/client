@@ -10,6 +10,7 @@
 angular.module('loqalusClientApp')
   .controller('navController', ['userFactory', 'templateFactory', '$uibModal', '$window', function(userFactory, templateFactory, $uibModal, $window){
     var nav = this;
+    nav.uid = 0;
     nav.isLoggedIn;
     nav.openSignUpModal;
 
@@ -17,6 +18,7 @@ angular.module('loqalusClientApp')
         var auth = userFactory.getAuthToken();
         if(auth){
             nav.isLoggedIn = true;
+            nav.uid = userFactory.getUserId();
         }
         else{
             nav.isLoggedIn = false;
@@ -24,29 +26,29 @@ angular.module('loqalusClientApp')
     }
 
     nav.openSignUpModal = function(){
-	    $uibModal.open({
-	        template: templateFactory.getSignInModal(),
-	        size: 'lg',
-	        controller: 'signInAndModalCtrl',
-	        bindToController: true,
-	        controllerAs: 'vm'
-	      });
+        $uibModal.open({
+            template: templateFactory.getSignInModal(),
+            size: 'lg',
+            controller: 'signInAndModalCtrl',
+            bindToController: true,
+            controllerAs: 'vm'
+          });
     }
 
     nav.openRegisterModal = function(){
-	    $uibModal.open({
-	        template: templateFactory.getRegisterModal(),
-	        size: 'lg',
-	        controller: 'signInAndModalCtrl',
-	        bindToController: true,
-	        controllerAs: 'vm'
-	      });
+        $uibModal.open({
+            template: templateFactory.getRegisterModal(),
+            size: 'lg',
+            controller: 'signInAndModalCtrl',
+            bindToController: true,
+            controllerAs: 'vm'
+          });
     }
 
 
     nav.signOut = function(){
-    	console.log("signing out");
-    	userFactory.signOut().success(function(response){
+        console.log("signing out");
+        userFactory.signOut().success(function(response){
             console.log("signed out");
             console.log(response);
             $window.location.href="/";
@@ -56,12 +58,12 @@ angular.module('loqalusClientApp')
     }
 
     nav.isLoggedIn = function(){
-    	if(userFactory.getAuthToken()){
-    		return true;
-    	}
-    	else{
-    		return false;
-    	}
+        if(userFactory.getAuthToken()){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     init();

@@ -224,8 +224,7 @@ angular.module('loqalusClientApp')
     vm.deleteComment = function(){
       var id = $window.localStorage.getItem('comment_to_delete');
       var deletor = $window.localStorage.getItem('user_id');
-    console.log(id);
-    console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+
     var comment = {  "id": id, "deletor": deletor};
       var url = baseUrl+ "api/comments/";
       var req = {
@@ -240,6 +239,7 @@ angular.module('loqalusClientApp')
 
       $http(req).success(function(response){
         $uibModalInstance.close();
+        $window.localStorage.removeItem('comment_to_delete');
         $window.location.reload()
       }).error(function(response){
         console.log(response);

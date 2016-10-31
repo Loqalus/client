@@ -9,9 +9,9 @@
  */
 angular.module('loqalusClientApp')
   .controller('modalInhouseCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', 'templateFactory', function ($scope, newActionPage, $uibModalInstance, $uibModal, templateFactory) {
-  	var vm = this;
+    var vm = this;
     vm.inHouse = true;
-  	vm.$onInit;
+    vm.$onInit;
     vm.type;
     vm.close;
     vm.toggle;
@@ -95,8 +95,8 @@ angular.module('loqalusClientApp')
   }
 
 
-  	vm.$onInit = function(){
+    vm.$onInit = function(){
       vm.type = newActionPage.getType();
-  	}
+    }
 
   }]);

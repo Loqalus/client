@@ -6,6 +6,10 @@ body {
   font-family: helvetica, garamond;
 }
 
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
 h1 {
   color: white;
   position: relative;
@@ -54,33 +58,69 @@ h1:before {
 </style>
 
 
-    <div class="user-name">
-  <h1 >{{profileCtrl.user.name}}</h1>
-</div>
 
-<div class="user-options">
-  <a class="profile"><button type="button" class="btn btn-warning btn-lg">Profile</button></a>
-  <a class="tags"><button type="button" class="btn btn-warning btn-lg">Interests</button></a>
-   <a ng-show="profileCtrl.canEdit()"><button type="button" ng-click = "profileCtrl.editProfile()" class="btn btn-warning btn-lg">Edit</button></a>
-  <a ng-show="profileCtrl.canEdit()"><button type="button" ng-click = "profileCtrl.deleteProfile()" class="btn btn-warning btn-lg">Delete Profile</button></a>
+    <section id="blog" class="container">
+        <div class="center">
+            <p class="lead">{{profileCtrl.user.name}}</p>
+        </div>
+
+
+        <div class="user-options">
+
   <!-- <a class="activity"><button type="button" class="btn btn-warning btn-lg">Activity</button></a> -->
 </div>
 
-<div class="row">
-  <div class="center" id="user-profile">
-    <h2>About Me</h2>
-    <p>{{profileCtrl.user.bio}}
-</p>
-  </div>
+        <div class="blog">
+            <div class="row">
+   <a style="display: none;" ng-style="profileCtrl.style" type="button"><button ng-click = "profileCtrl.editProfile()" class="btn btn-warning btn-lg">Edit</button><a/>
+  <a style="display: none;" ng-style="profileCtrl.style"><button type="button" ng-click = "profileCtrl.deleteProfile()" class="btn btn-warning btn-lg">Delete Profile</button></a>
+                 <div class="col-md-8">
+                    <div class="blog-item">
+                        <div class="row">
+                                
+                            <div class="col-xs-12 col-sm-10 blog-content">
+                                <h3><a>About Me</a></h3>
+                                <h4>{{profileCtrl.user.bio}}</h4>
+                            </div>
+                        </div>    
+                    </div><!--/.blog-item-->
+                </div><!--/.col-md-8-->
 
-  <div class="center" id="user-tags">
-    <h2>Interests</h2> 
-    <div ng-repeat="interest in profileCtrl.interests">
-          <a href='javascript:' class="btn btn-info" role="button">{{interest}}</a>
-    </div>
-  </div>
+                <aside class="col-md-4">
+                    <div class="widget tags">
+                        <h3>Tags</h3>
+                        <ul class="tag-cloud">
+                            <li ng-repeat="tag in profileCtrl.interests"><a class="btn btn-xs btn-primary">{{tag}}</a></li>
+                            <p ng-if="eventCtrl.tags.length == 0" class="text-muted">No interest</p>
+                        </ul>
 
-</div>
+                    </div><!--/.tags-->
+              </aside>  
+    </section>
+<!--     <div class="user-name">
+  <h1 >{{profileCtrl.user.name}}</h1>
+</div> -->
+<!--                  <div class="col-md-8">
+                    <div class="blog-item">
+                        <div class="row">
+                                
+                            <div class="col-xs-12 col-sm-10 blog-content">
+                                <h2><a>{{profileCtrl.user.name}}</a></h2>
+                                <h3>{{profileCtrl.user.bio}}</h3>
+                            </div>
+                        </div>    
+                    </div>
+                </div> -->
+<!-- 
+            <div class="center">
+               <h2>{{profileCtrl.user.name}}</h2>
+               <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> et dolore magna aliqua. Ut enim ad minim veniam</p>
+            </div>
+ -->
+
+
+
+
 
 
 
