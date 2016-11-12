@@ -1,5 +1,10 @@
 <div class="container-fluid">
- <ng-map on-zoom_changed="main.zoomChanged()" on-dragend="main.dragEnd()" on-dragstart="main.dragStart()" zoom="{{main.zoom}}" center="[{{main.lat}}, {{main.lng}}]" scrollWheel="false" disable-default-u-i="true" zoom-control="true" streetViewControl="false">
+<div class="row">
+  <div class="col-md-4 shadowBorder">Conversations <div class="circleGreen"> </div> </div>
+  <div class="col-md-4 shadowBorder">Events <div class="circleRed"> </div></div>
+  <div class="col-md-4 shadowBorder">Projects <div class="circleBlue"></div></div>
+</div>
+ <ng-map on-zoom_changed="main.zoomChanged()" on-dragend="main.dragEnd()" on-dragstart="main.dragStart()" zoom="{{main.zoom}}" center="[{{main.lat}}, {{main.lng}}]" scrollWheel="false" disable-default-u-i="true" zoom-control="true" streetViewControl="false" style="height: 500px; display:block; ">
     <drawing-manager
       on-overlaycomplete="main.onMapOverlayCompleted(this)"
       drawing-control-options="{position: 'BOTTOM_CENTER', drawingModes:['marker']}"
@@ -16,16 +21,16 @@
 </div>
 
 <div class="center" id="mission">
-  <h2>See what's happening in your community! </h2>
-  <p>Loqalus is a community building tool which helps you discover local events, conversations, and crowdfunding projects that are interesting to you. We aim to reinvent how people work together by integrating neighborhood ties with technology in order to create a community hub fit for today’s world.
- 
- <br>
+  <h2>See what's happening in the community! </h2>
+  <p style="font-size: medium;">Loqalus is a community building tool which helps you discover local events, conversations, and crowdfunding projects that are interesting to you. We aim to reinvent how people work together by integrating neighborhood ties with technology in order to create a community hub fit for today’s world.
+
+ <br> 
  <br>
   Sign-up to create a profile and get updates from our team!
 
  <br>
+Have any feedback for us? Share your thoughts here: 
  <br>
-  If you're interested in learning more about our startup, please <a href = "mailto:carloscurrea@loqalus.com">email us!</a>
-
+ For business inquiries, please <a href = "mailto:carloscurrea@loqalus.com">email us!</a>
 </p>
 </div>

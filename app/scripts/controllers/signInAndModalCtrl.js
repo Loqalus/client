@@ -8,7 +8,7 @@
  * Controller of the loqalusClientApp
  */
 angular.module('loqalusClientApp')
-  .controller('signInAndModalCtrl', ['userFactory', '$uibModalInstance', '$window', '$http', 'urlFactory', '$scope', function (userFactory, $uibModalInstance, $window, $http, urlFactory, $scope) {
+  .controller('signInAndModalCtrl', ['userFactory', '$uibModalInstance', '$window', '$http', 'urlFactory', '$scope', 'templateFactory', '$uibModal', function (userFactory, $uibModalInstance, $window, $http, urlFactory, $scope, templateFactory, $uibModal) {
     var vm = this;
     var baseUrl = urlFactory.getBaseUrl();
     vm.email;
@@ -78,9 +78,19 @@ angular.module('loqalusClientApp')
       }
       userFactory.createUser(newUser).success(function(response){
         userFactory.setUser(response);
-        //tag user
+        vm.close();
+      var modal = $uibModal.open({
+      template: templateFactory.getRegisterSuccess(),
+      size: 'lg',
+      controller: 'modalOneCtrl',
+      bindToController: true,
+      controllerAs: 'vm'
+    });
 
+      $window.setTimeout(function(){
         $window.location.reload();
+      }, 2000);
+        
         console.log(response);
       }).error(function(error){
         console.log(error);

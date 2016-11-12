@@ -5,6 +5,49 @@
   padding: 0.2em 0;
 }
 
+.cleanTags{
+    max-height: 150px; 
+   overflow-x:hidden; 
+   overflow-y:auto;
+}
+
+/* SOURCE: https://churchm.ag/beveled-pressed-shadow-css-borders/*/
+.shadowBorder {
+    padding: 20px;
+    border: 0.5px solid #f0f0f0;
+    border-bottom: 1px solid #ccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.circleGreen {
+    background: #66FF66;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display:inline-block;
+    margin-left: 5px;
+}
+
+.circleRed {
+    background: #FE7569;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display:inline-block;
+    margin-left: 5px;
+}
+
+.circleBlue {
+    background: #3399FF;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display:inline-block;
+    margin-left: 5px;
+}
 
 .box {
     padding: 0 5px 0 5px;
@@ -1422,4 +1465,19 @@ left: 0; }
     
 
 }
+
+
+
+@media (max-width:768px){ .footer-distributed{*/
+  background-color: #292c2f;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: normal 16px sans-serif;
+  max-height: 100px;
+  padding: 45px 50px;
+  margin-top: 80px;
+}
+ }
 

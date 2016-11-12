@@ -13,6 +13,7 @@ angular.module('loqalusClientApp').factory('urlFactory', [function () {
   // var baseUrl = "https://api.loqalus.com/";
 
 
+
   function getBaseUrl(){
     return baseUrl;
   }

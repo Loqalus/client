@@ -7,7 +7,7 @@
  * # CrtCampMdlCtrl
  * Controller of the loqalusClientApp
  */
-angular.module('loqalusClientApp').controller('CrtCampMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', '$http', 'urlFactory', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window, $http, urlFactory) {
+angular.module('loqalusClientApp').controller('CrtCampMdlCtrl', ['$scope', 'newActionPage', '$uibModalInstance', '$uibModal', '$window', '$http', 'urlFactory', 'templateFactory', function ($scope, newActionPage, $uibModalInstance, $uibModal, $window, $http, urlFactory, templateFactory) {
 
   var vm = this;
   vm.inHouse = newActionPage.getInHouse();
@@ -73,7 +73,20 @@ angular.module('loqalusClientApp').controller('CrtCampMdlCtrl', ['$scope', 'newA
     newActionPage.createCampaign(vm.campaign)
     .success(function (data, status, headers, config) {
       vm.close();
+      
+      if(vm.campaign.in_house){
       // $window.location.href = "/#/campaign/" + data.message.id;
+      }else{
+        $window.setTimeout(function(){
+            var modalInstance = $uibModal.open({
+            template: templateFactory.getPromotedProjectSuccess(),
+            size: 'md',
+            controller: 'modalOneCtrl',
+            bindToController: true,
+            controllerAs: 'vm'
+         });
+          }, 1000);
+      }
       console.log("success");
     })
     .error(function (data, status, header, config) {

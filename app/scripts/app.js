@@ -44,7 +44,7 @@ angular
       controller: 'conversationMasterlist',
       controllerAs: 'vm'
     })
-    .when('/campaigns', {
+    .when('/projects', {
       templateUrl: 'views/campaigns.html',
       controller: 'campaignMasterlist',
       controllerAs: 'vm'

@@ -2,25 +2,25 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
   function getCreatePinsOne(){
     return `<div class="modal-lg">
        <div class="modal-header">
-         What would you a like to start in your community?<button type="button" ng-click="vm.close()" class="close">&times;</button>
+         What type of content are you creating?<button type="button" ng-click="vm.close()" class="close">&times;</button>
        </div>
          <div class="modal-body-lg">
         <div class="col-lg-12 modal-white-bg">
           <div class="col-lg-1">
           </div>
           <div ng-class="vm.convoClass" ng-click="vm.setType('Conversation')">
-            <h3>Make a Post</h3>
-            <p class="startanaction-desc"> Raise awareness and start a conversation</p> </label>
+            <h3>Start a conversation</h3>
+            <p class="startanaction-desc"> Raise awareness and get people talking</p> </label>
           </div>
 
           <div ng-class="vm.eventClass" ng-click="vm.setType('Event')">
-            <h3>Create an Event</h3>
-            <p class="startanaction-desc">Get people together for a local gathering</p> </label>
+            <h3>Make an event</h3>
+            <p class="startanaction-desc">Get people together for a gathering</p> </label>
           </div>
 
           <div ng-class="vm.campaignClass" ng-click="vm.setType('Campaign')">
-            <h3>Begin a Campaign</h3>
-            <p class="startanaction-desc">Raise funds for a local project, cause, or enterprise.</p> </label>
+            <h3>Create a project</h3>
+            <p class="startanaction-desc">Raise funds for a campaign, cause, or enterprise.</p> </label>
           </div>
           <div class="col-lg-1">
           </div>
@@ -36,7 +36,7 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
   function getInHouseOrOutSrc(){
     return `<div class="modal-lg">
        <div class="modal-header">
-         Will this be in house content or sourced content?<button type="button" ng-click="vm.close()" class="close">&times;</button>
+         Where is this content coming from?<button type="button" ng-click="vm.close()" class="close">&times;</button>
        </div>
          <div class="modal-body-lg">
         <div class="col-lg-12 modal-white-bg">
@@ -44,12 +44,12 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
           </div>
           <div ng-class="vm.sourcedClass" ng-click="vm.setType('sourced')">
             <h3>Sourced</h3>
-            <p class="startanaction-desc"> Sourced content is content created on another site that you wish to promote on Loqalus.</p> </label>
+            <p class="startanaction-desc"> You are linking to an existing site.</p> </label>
           </div>
 
           <div ng-class="vm.inHouseClass" ng-click="vm.setType('inHouse')">
             <h3>In House</h3>
-            <p class="startanaction-desc">In house content is content created originally on Loqalus. (Campaigns not yet supported!)</p> </label>
+            <p class="startanaction-desc"> You are creating content on Loqalus only. (Crowdfunding projects not yet supported!)</p> </label>
           </div>
           
         </div>
@@ -70,7 +70,7 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
           <div class="col-lg-1">
           </div>
           <div ng-class="vm.convoClass" ng-click="vm.setType('Conversation')">
-            <h3>Make a Post</h3>
+            <h3>Make a Conversation</h3>
             <p class="startanaction-desc"> Raise awareness and start a conversation</p> </label>
           </div>
 
@@ -80,7 +80,7 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
           </div>
 
           <div ng-class="vm.campaignClass" ng-click="vm.setType('Campaign')">
-            <h3>Begin a Campaign</h3>
+            <h3>Begin a Project</h3>
             <p class="startanaction-desc">Raise funds for a local project, cause, or enterprise.</p> </label>
           </div>
           <div class="col-lg-1">
@@ -104,21 +104,21 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
       <form role="form" ng-show="vm.inHouse">
        <div class="form-group">
          <label for="title"><span class="glyphicon "></span> Title: </label>
-         <input type="text" class="form-control" ng-required="vm.inHouse" ng-model="vm.convo.title" placeholder="Title for your conversation">
+         <input type="text" class="form-control" ng-required="vm.inHouse" ng-model="vm.convo.title">
        </div>
        <div class="form-group">
          <label for="description"><span class="glyphicon"></span> Description: </label>
-         <input type="text" class="form-control" ng-required="vm.inHouse" ng-model="vm.convo.description" placeholder="Description of your post">
+         <input type="text" class="form-control" ng-required="vm.inHouse" ng-model="vm.convo.description">
        </div>
            <div>
-            <label>Tag Event</label>
+            <label>Tag</label>
             <input type="text" data-ng-model="vm.tag" list="allTags">
           </div>
           <div>
             <input type="Button" value="Add" data-ng-click="vm.addTag()">
             </div>
           <datalist id="allTags">
-            <option  data-ng-repeat="tag in vm.allTags" value="{{tag}}"> 
+            <option data-ng-repeat="tag in vm.allTags" value="{{tag}}"> 
           </datalist>
           <div data-ng-repeat="tags in vm.convoTags">
             <span> {{tags}} </span>
@@ -129,29 +129,29 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
       <form role="form" ng-hide="vm.inHouse">
        <div class="form-group">
          <label for="title"><span class="glyphicon "></span> Title: </label>
-         <input type="text" class="form-control" ng-required="{{!vm.inHouse}}" ng-model="vm.convo.title" placeholder="Title for the post">
+         <input type="text" class="form-control" ng-required="{{!vm.inHouse}}" ng-model="vm.convo.title">
        </div>
        <div class="form-group">
          <label for="description"><span class="glyphicon"></span> Description: </label>
-         <input type="text" class="form-control" ng-required="{{!vm.inHouse}}" ng-model="vm.convo.description" placeholder="Description of the post">
+         <input type="text" class="form-control" ng-required="{{!vm.inHouse}}" ng-model="vm.convo.description">
        </div>
         <div class="form-group">
          <label for="description"><span class="glyphicon"></span> Link: </label>
-         <input type="text" class="form-control" ng-required="{{!vm.inHouse}}" ng-model="vm.convo.link" placeholder="Link to post">
+         <input type="text" class="form-control" ng-required="{{!vm.inHouse}}" ng-model="vm.convo.link">
        </div>
            <div>
-            <label>Tag Event</label>
+            <label>Tag</label>
             <input type="text" data-ng-model="vm.tag" list="allTags">
           </div>
           <div>
             <input type="Button" value="Add" data-ng-click="vm.addTag()">
             </div>
-          <datalist id="allTags">
+          <datalist  id="allTags">
             <option  data-ng-repeat="tag in vm.allTags" value="{{tag}}"> 
           </datalist>
           <div data-ng-repeat="tags in vm.convoTags">
             <span> {{tags}} </span>
-          </div>
+            </div>
      </form>
 
      </div>
@@ -166,20 +166,20 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
     return `<div class="modal-content">
         
        <div class="modal-header">
-         <span> Create Campaign </span> <button type="button" ng-click="vm.close()" class="close">&times;</button>
+         <span> Create Project </span> <button type="button" ng-click="vm.close()" class="close">&times;</button>
        </div>
        <div class="modal-body" style="padding:40px 50px;">
          <form role="form" ng-show="vm.inHouse">
            <div class="form-group">
              <label for="title"><span class="glyphicon "></span> Title: </label>
-             <input type="text" class="form-control" ng-required="vm.inHouse" ng-model="vm.campaign.title" placeholder="Title for your Campaign">
+             <input type="text" class="form-control" ng-required="vm.inHouse" ng-model="vm.campaign.title">
            </div>
            <div class="form-group">
              <label for="description"><span class="glyphicon"></span> Description: </label>
-             <input type="text" class="form-control" ng-required="vm.inHouse"  ng-model="vm.campaign.description" placeholder="Description of your Campaign">
+             <input type="text" class="form-control" ng-required="vm.inHouse"  ng-model="vm.campaign.description">
            </div>
            <div>
-            <label>Tag Event</label>
+            <label>Tag</label>
             <input type="text" data-ng-model="vm.tag" list="allTags">
           </div>
           <div>
@@ -195,15 +195,15 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
           <form role="form" ng-hide="vm.inHouse">
            <div class="form-group">
              <label for="title"><span class="glyphicon "></span> Title: </label>
-             <input type="text" class="form-control" ng-required="{{!vm.inHouse}}" ng-model="vm.campaign.title" placeholder="Title for the Campaign">
+             <input type="text" class="form-control" ng-required="{{!vm.inHouse}}" ng-model="vm.campaign.title">
            </div>
            <div class="form-group">
              <label for="description"><span class="glyphicon"></span> Description: </label>
-             <input type="text" class="form-control" ng-required="{{!vm.inHouse}}" ng-model="vm.campaign.description" placeholder="Description of the Campaign">
+             <input type="text" class="form-control" ng-required="{{!vm.inHouse}}" ng-model="vm.campaign.description">
            </div>
            <div class="form-group">
              <label for="description"><span class="glyphicon"></span> Link: </label>
-             <input type="text" class="form-control" ng-required="{{!vm.inHouse}}"  ng-model="vm.campaign.link" placeholder="Link to Campaign">
+             <input type="text" class="form-control" ng-required="{{!vm.inHouse}}"  ng-model="vm.campaign.link">
            </div>
            <div>
             <label>Tag Event</label>
@@ -237,11 +237,11 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
          <form role="form" ng-show="vm.inHouse">
            <div class="form-group">
              <label for="title"><span class="glyphicon "></span> Title: </label>
-             <input type="text" class="form-control" ng-model="vm.newEvent.title" ng-required="vm.inHouse" placeholder="Title for your Event">
+             <input type="text" class="form-control" ng-model="vm.newEvent.title" ng-required="vm.inHouse">
            </div>
            <div class="form-group">
              <label for="description"><span class="glyphicon"></span> Description: </label>
-             <input type="text" class="form-control" ng-model="vm.newEvent.description" ng-required="vm.inHouse" placeholder="Description of your Event">
+             <input type="text" class="form-control" ng-model="vm.newEvent.description" ng-required="vm.inHouse">
            </div>
           <h4>Date of the Event</h4>
           <div style="display:inline-block; min-height:290px;">
@@ -268,15 +268,15 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
           <form role="form" ng-hide="vm.inHouse">
            <div class="form-group">
              <label for="title"><span class="glyphicon "></span> Title: </label>
-             <input type="text" class="form-control" ng-model="vm.newEvent.title" ng-required="{{!vm.inHouse}}" placeholder="Title for the Event">
+             <input type="text" class="form-control" ng-model="vm.newEvent.title" ng-required="{{!vm.inHouse}}">
            </div>
            <div class="form-group">
              <label for="description"><span class="glyphicon"></span> Description: </label>
-             <input type="text" class="form-control" ng-model="vm.newEvent.description" ng-required="{{!vm.inHouse}}" placeholder="Description of the Event">
+             <input type="text" class="form-control" ng-model="vm.newEvent.description" ng-required="{{!vm.inHouse}}">
            </div>
             <div class="form-group">
              <label for="description"><span class="glyphicon"></span> Link: </label>
-             <input type="text" class="form-control" ng-model="vm.newEvent.link" ng-required="{{!vm.inHouse}}" placeholder="Link to Event">
+             <input type="text" class="form-control" ng-model="vm.newEvent.link" ng-required="{{!vm.inHouse}}">
            </div>
            <hr>
           <div>
@@ -329,28 +329,28 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
   function getRegisterModal(){
     return `<div class="modal-content">
               <div class="modal-header">
-               <span>Create An Account</span> <button type="button" ng-click="vm.close()" class="close">&times;</button>
+               <span>Create your profile</span> <button type="button" ng-click="vm.close()" class="close">&times;</button>
              </div>
                 <div class="modal-body" style="padding:40px 50px;">
                       <form role="form"> 
                         <div class="form-group">
                             <label for="name"><span class="glyphicon"></span> Name: </label>
-                            <input type="text" ng-model="vm.name" class="form-control" placeholder="Name">
+                            <input type="text" ng-model="vm.name" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="email"><span class="glyphicon"></span> Email: </label>
-                            <input type="email" ng-model="vm.newEmail" class="form-control" placeholder="Email">
+                            <input type="email" ng-model="vm.newEmail" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="bio"><span class="glyphicon"></span> Bio: </label>
-                            <textarea  ng-model="vm.bio" name="paragraph_text" class="form-control" placeholder="Describe Yourself" cols="50" rows="10"></textarea>
+                            <label for="bio"><span class="glyphicon"></span> Tell us a bit about yourself: </label>
+                            <textarea  ng-model="vm.bio" name="paragraph_text" class="form-control" placeholder="Go ahead, tell us your life story..." cols="50" rows="10"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="password"><span class="glyphicon"></span> Password: </label>
-                            <input type="password" ng-model="vm.newPassword" class="form-control" placeholder="Password">
+                            <label for="password"><span class="glyphicon"></span> Password (must be at least 8 characters long):</label>
+                            <input type="password"  ng-model="vm.newPassword" class="form-control" placeholder="Password">
                         </div>
                       <div>
-                        <label>Your Interests</label>
+                        <label>List what you're interested in:</label>
                         <input type="text" data-ng-model="vm.interest" list="allInterests">
                       </div>
                       <div>
@@ -366,7 +366,7 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
                 </div>
 
                <div class="modal-footer">
-                  <button type="submit" ng-click="vm.signUp()" class="btn btn-success btn-block" ><span class="glyphicon glyphicon-off"></span> Create</button>
+                  <button type="submit" ng-click="vm.signUp()" class="btn btn-success btn-block" ><span class="glyphicon glyphicon-off"></span> Welcome</button>
                </div>
           </div>
           `
@@ -468,10 +468,10 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
         function getMustSignIn(){
     return `<div class="modal-content">
               <div class="modal-header">
-               <span>You must create a profile in order to post content!</span> <button type="button" ng-click="vm.close()" class="close">&times;</button>
+               <span>Hold on there neighbor!</span> <button type="button" ng-click="vm.close()" class="close">&times;</button>
              </div>
                 <div class="modal-body" style="padding:40px 50px;">
-
+                  <span style="font-size: medium;"> You must create a profile in order to drop a pin. </span>
                 </div>
 
                <div class="modal-footer">
@@ -636,6 +636,38 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
           `
   }
 
+  function getRegisterSuccess(){
+    return `<div class="modal-content">
+              <div class="modal-header">
+               <span>Success!</span> <button type="button" ng-click="vm.close()" class="close">&times;</button>
+             </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <span style="font-size: medium;"> Now go explore...</span>
+                </div>
+
+               <div class="modal-footer">
+                 
+               </div>
+          </div>
+          `
+  }
+
+  function getPromotedProjectSuccess(){
+    return `<div class="modal-content">
+              <div class="modal-header">
+               <span>Promoted Project created!</span> <button type="button" ng-click="vm.close()" class="close">&times;</button>
+             </div>
+                <div class="modal-body" style="padding:40px 50px;">
+
+                </div>
+
+               <div class="modal-footer">
+                  <button type="submit" ng-click="vm.close()" class="btn btn-success btn-block" ></span> Ok</button>
+               </div>
+          </div>
+          `
+  }
+
   return {
   	getCreatePinsOne: getCreatePinsOne,
     getConversationModal: getConversationModal,
@@ -653,7 +685,9 @@ angular.module('loqalusClientApp').factory('templateFactory', function(){
     getEditEventModal: getEditEventModal,
     getDeleteCommentModal: getDeleteCommentModal,
     getPromotedConvoSuccess: getPromotedConvoSuccess,
-    getPromotedEventSuccess: getPromotedEventSuccess
+    getPromotedEventSuccess: getPromotedEventSuccess,
+    getRegisterSuccess: getRegisterSuccess,
+    getPromotedProjectSuccess: getPromotedProjectSuccess
   };
 
 });

@@ -17,6 +17,13 @@ angular.module('loqalusClientApp').factory('newActionPage', ['$http', 'userFacto
 
   function createEvent(newEvent) {
     newEvent.in_house = inHouse;
+
+    if(!inHouse){
+      var re = new RegExp("^(http|https)://", "i");
+      if(!re.test(newEvent.link)){
+        newEvent.link = "http://"+ newEvent.link;
+      }
+    }
     var payload = {
         event: newEvent
     }
@@ -34,6 +41,13 @@ angular.module('loqalusClientApp').factory('newActionPage', ['$http', 'userFacto
 
   function createConversation(convo) {
     convo.in_house = inHouse;
+
+    if(!inHouse){
+      var re = new RegExp("^(http|https)://", "i");
+      if(!re.test(convo.link)){
+        convo.link = "http://"+ convo.link;
+      }
+    }
     var payload = {
         conversation: convo
     }
@@ -51,6 +65,13 @@ angular.module('loqalusClientApp').factory('newActionPage', ['$http', 'userFacto
 
   function createCampaign(campaign) {
     campaign.in_house = inHouse;
+
+    if(!inHouse){
+      var re = new RegExp("^(http|https)://", "i");
+      if(!re.test(campaign.link)){
+        campaign.link = "http://"+ campaign.link;
+      }
+    }
     var payload = {
         campaign: campaign
     }
